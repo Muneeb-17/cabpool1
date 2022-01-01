@@ -1,0 +1,85 @@
+{
+  "name": "cabpool",
+  "version": "0.1.0",
+  "private": true,
+  "proxy": "http://localhost:5000/",
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.36",
+    "@fortawesome/free-solid-svg-icons": "^5.15.4",
+    "@fortawesome/react-fontawesome": "^0.1.16",
+    "@googlemaps/react-wrapper": "^1.1.15",
+    "@material-ui/core": "^4.12.3",
+    "@material-ui/icons": "^4.11.2",
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^11.2.7",
+    "@testing-library/user-event": "^12.8.3",
+    "axios": "^0.21.4",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "bootstrap": "^5.1.0",
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "express-openid-connect": "^2.5.2",
+    "font-awesome": "^4.7.0",
+    "google-map-react": "^2.1.10",
+    "google-maps-react": "^2.0.6",
+    "hbs": "^4.1.2",
+    "js-cookie": "^3.0.1",
+    "jsonwebtoken": "^8.5.1",
+    "mdbreact": "^5.2.0",
+    "moment": "^2.29.1",
+    "mongoose": "^6.0.13",
+    "mongoose-type-email": "^1.1.2",
+    "nodemon": "^2.0.15",
+    "places.js": "^1.19.0",
+    "react": "^17.0.2",
+    "react-autocomplete": "^1.8.1",
+    "react-bootstrap": "^2.0.0-beta.4",
+    "react-dom": "^17.0.2",
+    "react-hook-form": "^7.21.2",
+    "react-places-autocomplete": "^7.3.0",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "4.0.3",
+    "react-select": "^5.2.1",
+    "react-social-login-buttons": "^3.5.0",
+    "reactstrap": "^8.9.0",
+    "validator": "^13.7.0",
+    "web-vitals": "^1.1.2"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "parser": "@babel/eslint-parser"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "main": "index.js",
+  "devDependencies": {
+    "@babel/eslint-parser": "^7.16.3",
+    "babel-eslint": "^10.1.0",
+    "cookie-parser": "^1.4.6"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

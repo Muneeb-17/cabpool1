@@ -1,0 +1,322 @@
+
+  * {
+    box-sizing: border-box;
+  }
+  
+  .s01 {
+   /* min-height: 100vh;*/
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: center;
+        justify-content: center;
+    -ms-flex-align: center;
+        align-items: center;
+    font-family: 'Poppins', sans-serif;
+    background-size: cover;
+    background-position: center center;
+    padding: 15px;
+  }
+  
+  .s01 form {
+    width: 100%;
+    max-width: 1290px;
+  }
+  
+  .s01 form legend {
+    font-size: 72px;
+    line-height: 1;
+    color: #fff;
+    margin-bottom: 60px;
+  }
+  
+  .s01 form .inner-form {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 50px 47px;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+    -ms-flex-pack: justify;
+        justify-content: space-between;
+    -ms-flex-align: center;
+        align-items: center;
+  }
+  
+  .s01 form .inner-form .input-field {
+    margin-right: 30px;
+    height: 40px;
+  }
+  
+  .s01 form .inner-form .input-field input {
+    height: 100%;
+    background: #fff;
+    border-radius: 10px;
+    border: 0;
+    display: block;
+    width: 100%;
+    padding: 10px 32px;
+    font-size: 20px;
+  }
+  
+  .s01 form .inner-form .input-field input.placeholder {
+    color: #9a9a9a;
+    font-size: 20px;
+  }
+  
+  .s01 form .inner-form .input-field input:-moz-placeholder {
+    color: #9a9a9a;
+    font-size: 20px;
+  }
+  
+  .s01 form .inner-form .input-field input::-webkit-input-placeholder {
+    color: #9a9a9a;
+    font-size: 20px;
+  }
+  
+  .s01 form .inner-form .input-field input:hover, .s01 form .inner-form .input-field input:focus {
+    box-shadow: none;
+    outline: 0;
+  }
+  
+  .s01 form .inner-form .input-field.first-wrap {
+    -ms-flex-positive: 1;
+        flex-grow: 1;
+  }
+  
+  .s01 form .inner-form .input-field.second-wrap {
+    width: 32.77%;
+    min-width: 180px;
+  }
+  
+  .s01 form .inner-form .input-field.third-wrap {
+    width: 180px;
+    margin-right: 0;
+  }
+  
+  .s01 form .inner-form .input-field.third-wrap .btn-search {
+    height: 100%;
+    width: 100%;
+    background: #4272d7;
+    white-space: nowrap;
+    border-radius: .5px;
+    font-size: 20px;
+    color: #fff;
+    transition: all .2s ease-out, color .2s ease-out;
+    border: 0;
+    cursor: pointer;
+  }
+  
+  .s01 form .inner-form .input-field.third-wrap .btn-search:hover {
+    background: #2d62d3;
+  }
+  
+  @media screen and (max-width: 992px) {
+    .s01 form legend {
+      font-size: 50px;
+      text-align: center;
+      margin-bottom: 50px;
+    }
+    .s01 form .inner-form {
+      padding: 30px 35px;
+    }
+    .s01 form .inner-form .input-field {
+      height: 50px;
+    }
+  }
+  
+ @media screen and (max-width: 767px) {
+    .s01 form legend {
+      font-size: 40px;
+      margin-bottom: 40px;
+    }
+    .s01 form .inner-form {
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap;
+      padding: 20px;
+    }
+    .s01 form .inner-form .input-field {
+      margin-right: 0;
+    }
+    .s01 form .inner-form .input-field input {
+      padding: 5px 15px;
+      font-size: 16px;
+    }
+    .s01 form .inner-form .input-field.first-wrap {
+      width: 100%;
+      margin-bottom: 20px;
+    }
+    .s01 form .inner-form .input-field.second-wrap {
+      width: calc(50% - 10px);
+      min-width: auto;
+    }
+    .s01 form .inner-form .input-field.third-wrap {
+      width: calc(50% - 10px);
+    }
+    .s01 form .inner-form .input-field.third-wrap .btn-search {
+      font-size: 16px;
+    }
+  }
+  .trainer-card-wrapper{
+    display:flex;
+    flex-direction:row;
+    justify-content:space-evenly;
+    align-content: center;
+  }
+  
+  .trainer-card{
+    background-color: #263238 ;
+    border: 3px solid white;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-evenly;
+    align-items:center;
+    width: 370px;
+    height: 510px;
+    text-align:center;
+    
+    border-radius: 20px;
+    padding:10px;
+    
+   
+  }
+  .card-login{
+    background-color: #263238 ;
+    border: 3px solid white;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-evenly;
+    align-items:center;
+    width:300px;
+    height: 400px;
+    text-align:center;
+    
+    border-radius: 20px;
+    padding:10px;
+    
+  }
+  
+  
+  
+  .trainer-card-photo{
+    height:70px;
+    width:70px;
+    align-items: center;
+    
+    border-radius:50%;
+    border: 4px double white;
+    
+    margin-top:30px;
+    margin-bottom: 8px;
+    margin-left: 40px;
+    
+    transition: ease-in-out 0.5s;
+  }
+  
+  .trainer-name-title{
+    border-top: 3px double black;
+      border-bottom: 3px double black;
+  color: white;
+    width:80%;
+    padding:10px 0px;
+    margin-left: 20px;
+    
+  }
+  
+  
+  
+  .origin{
+      color: white;
+      font-size: 16px;
+       /* display: flex; */
+      
+
+    
+  }
+  .origin1{
+      color:white;
+      font-size: 16px;
+      
+      /* align-content: center; */
+  }
+  .origin12{
+    color:white;
+    font-size: 16px;
+    margin-left: 10px;
+    place-items: flex-start auto;
+    /* align-content: center; */
+}
+
+  .destination1{
+    color: white;
+    font-size: 16px;
+   
+    /* padding-left: 10px; */
+    
+  }
+  
+  .trainer-card:hover .trainer-about-paragraph-button-wrapper{
+    transform:translateY(0px);
+  }
+  
+  .trainer-card:hover .trainer-card-photo{
+    margin-top:1px;
+  }
+  
+  
+  
+  .trainer-card:hover{
+    transform:scale(1.025);
+   
+  }
+  
+  .button12{
+    background:	#34a853;
+    margin-bottom: 10px;
+    color:#fff;
+    width:100%;
+    border:none;
+    border-radius: 20px;
+    font-size:1em;
+      padding-top:10px;
+    padding-bottom:10px;
+  }
+  .button1{
+    background:	#cf0505;
+    margin-bottom: 10px;
+    color:#fff;
+    width:100%;
+    border:none;
+    border-radius: 20px;
+    font-size:1em;
+      padding-top:10px;
+    padding-bottom:10px;
+  }
+  
+  .button:hover{
+   cursor:pointer;
+
+  }
+  
+  @media only screen and (max-width:768px){
+    .trainer-about-paragraph-button-wrapper{
+    transform:translateY(0px);
+    }
+    
+    .trainer-card-wrapper{
+      flex-direction:column;
+    }
+    
+    .trainer-card{
+      margin: 10px auto;
+      width:80%;
+   
+    }
+    
+    .trainer-card-photo{
+      margin-top:0px;
+    }
+  }
+  hr.dashed {
+    border-top: 3px dashed #bbb;
+  }

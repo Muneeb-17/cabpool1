@@ -1,0 +1,115 @@
+.body{
+    background-image: url('https://cdn2.vectorstock.com/i/1000x1000/04/26/carpool-service-cartoon-character-vector-24850426.jpg');
+    background-repeat: no-repeat;
+}
+.navbar-brand{
+    font-family: "Maven Pro" , sans-serif;
+    font-weight: bold;
+    padding-left: 5%;
+    
+}
+.card{
+margin-top: 5%;
+margin-bottom: auto;
+width: 400px;
+background-color: rgba(0,0,0,0.5) !important;
+}
+
+.social_icon span{
+font-size: 60px;
+margin-left: 10px;
+color: #000000;
+}
+
+.social_icon span:hover{
+color: white;
+cursor: pointer;
+}
+
+.card-header h3{
+color: white;
+}
+
+.social_icon{
+position: absolute;
+right: 20px;
+top: -45px;
+}
+
+.input-group-prepend span{
+width: 50px;
+background-color: #000000;
+color: rgb(255, 255, 255);
+border:0 !important;
+}
+
+input:focus{
+outline: 0 0 0 0  !important;
+box-shadow: 0 0 0 0 !important;
+
+}
+
+.remember{
+color: white;
+}
+
+.remember input
+{
+width: 20px;
+height: 20px;
+margin-left: 15px;
+margin-right: 5px;
+}
+
+.login_btn{
+color: rgb(255, 255, 255);
+background-color: #000000;
+width: 100px;
+}
+
+.login_btn:hover{
+color: black;
+background-color: white;
+}
+.feilds{
+    padding: 10px;
+}
+
+.bg_image{
+    background-image: url('../src/image/picture.png');
+    background-size: cover;
+    height: 100vh;
+    color: #f5f5f5;
+  }
+  .bg_image1{
+    background-image: url('../src/image/picture.png');
+    height: 100%;
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+}
+ 
+.navbar-nav{
+    margin-left: auto;
+    margin-right: 30px;
+}
+
+.error{
+   text-shadow: #000000;
+   color: rgb(216, 2, 2);
+   font-family:Arial, Helvetica, sans-serif;
+}
+
+.suggestion{
+    border-right: 1px solid rgb(255, 234, 234);
+    border-left: 1px solid rgb(253, 253, 253);
+    border-bottom: 1px solid rgb(247, 242, 242);
+    background: white   ;
+}
+
+.suggestion:hover{
+    background: gray;
+}
