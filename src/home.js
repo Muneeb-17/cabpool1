@@ -76,7 +76,7 @@ callHome();
   </Container>
 </Navbar>
 </div>
-<h1>Home Page After login</h1>
+<HomeDesign/>
 </>
 
        :<> <Navigation/>

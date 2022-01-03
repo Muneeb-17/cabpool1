@@ -111,15 +111,17 @@ const RideDetails=()=>{
                 <div className="input-group-prepend">
                     <span className="input-group-text"><PlaceIcon/></span>
                 </div>
-                <select type = "text"  name="departure" id="departure" className="form-control" placeholder="Orign"
-                    value={user.departure}
-                    onChange={handleInputs}
-                    options ={options} >
-                       
-                        <option value="Lahore">Lahore</option>
-                        <option value="kashmir">Kashmir</option>
-                        <option value="Islamabad">Islamabad</option>
-                </select>
+                <input list="Cities" name="departure" id="departure" placeholder="Origin" className="form-control"
+                value={user.departure}
+                onChange={handleInputs}/>
+  <datalist id="Cities">
+    <option value="Lahore"/>
+    <option value="Islamabad"/>
+    <option value="Karachi"/>
+    <option value="Kashmir"/>
+    <option value="Peshawar"/>
+  </datalist>
+                
                 </div>
                 </div>
 
@@ -129,10 +131,16 @@ const RideDetails=()=>{
                 <div className="input-group-prepend">
                     <span className="input-group-text"><PlaceIcon/></span>
                 </div>
-                <input type="text" name="destination" id="destination"  className="form-control" 
+                <input list="Cities" name="destination" id="destination" placeholder="Destination" className="form-control"
                 value={user.destination}
-                onChange={handleInputs}
-                placeholder="Destination"></input>
+                onChange={handleInputs}/>
+  <datalist id="Cities">
+    <option value="Lahore"/>
+    <option value="Islamabad"/>
+    <option value="Karachi"/>
+    <option value="Kashmir"/>
+    <option value="Peshawar"/>
+  </datalist>
             </div>
             </div>
             <div className="feilds">

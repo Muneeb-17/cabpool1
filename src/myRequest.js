@@ -41,7 +41,7 @@ const MyRequest = () => {
         setText(true);
     }
     const deleteRide = async (id) => {
-        fetch(`/delete/${id}`, {
+        fetch(`/cancel/${id}`, {
             method: 'DELETE'
         }).then(() => {
             getUser(
@@ -91,6 +91,7 @@ const MyRequest = () => {
                                                                 <div className="origin">
                                                                     <div> <span>Name:</span><span className="origin1">{c.name}</span> </div>
                                                                     <div> <span >Contact No:</span> <span className="destination1">{c.number}</span> </div>
+                                                                    <div> <span >No of Passenger:</span> <span className="destination1">{c.passenger}</span> </div>
                                                                     {text ?
                                                                         <button className="button1">End Trip</button>
                                                                         : <button className="button12" onClick={() => {

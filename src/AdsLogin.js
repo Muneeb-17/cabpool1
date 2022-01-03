@@ -1,8 +1,15 @@
 import React, { useEffect, useState} from "react";
-import {useHistory} from "react-router-dom";
+import {useHistory,Link} from "react-router-dom";
 import { Navbar} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 import Navigation from "./navigation";
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
+import PlaceIcon from '@material-ui/icons/Place';
+import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
+import DriveEtaIcon from '@material-ui/icons/DriveEta';
+import PhoneAndroidIcon from '@material-ui/icons/PhoneAndroid';
+import TimerIcon from '@material-ui/icons/Timer';
 import './search.css';
 const moment = require('moment');
 
@@ -89,15 +96,16 @@ const AdsLogin = () =>{
                 <div className="trainer-card-photo"></div>
                 <h4 className="trainer-name-title">{element.loginName}</h4>   
                 <div className="origin">
-                    <div> <span>Origin:</span><span className="origin1">{element.departure}</span> </div>
-                    <div> <span >Destination:</span> <span className="destination1">{element.destination}</span> </div>
+                    <div> <span><PlaceIcon/></span><span className="origin1">{element.departure}</span> </div>
+                    <MoreVertIcon />
+                    <div> <span ><PlaceIcon/></span> <span className="destination1">{element.destination}</span> </div>
                 </div>
                 <hr class="dashed"></hr>
                 <div className="origin">
-                    <div> <span>Date:</span> <span className="origin1">{element.date}</span> </div>
-                    <div> <span>Time:</span> <span className="destination1">{element.time}</span> </div>
+                    <div> <span><CalendarTodayIcon/></span> <span className="origin1">{element.date}</span> </div>
+                    <div> <span><TimerIcon/></span> <span className="destination1">{element.time}</span> </div>
                 </div>
-                <div className="button:hover"><button className="button12">Request</button> </div>
+                <div className="button:hover"><Link to ='./ads'><button className="button12">Request</button> </Link></div>
           </div>
         </div>
         </div>

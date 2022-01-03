@@ -17,6 +17,7 @@ app.use(cookieParser());
 const authenticate = require('../middleware/authenticate');
 app.use(express.urlencoded({ extended: true }));
 const moment = require('moment');
+var ObjectId = require('mongodb').ObjectId; 
 
 
 
@@ -125,12 +126,10 @@ router.post('/rideDetails', authenticate, async (req, res) => {
 router.get('/rideDetails', authenticate, async (req, res) => {
   console.log('-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=--==-=----------------- rideDetails');
   try {
-    let now = new Date();
-    var dateString = moment().subtract(1, 'days').format('YYYY-MM-DD');
+   
     const driverData = await Ride.find();
-    await Ride.deleteMany({ date: dateString });
     res.send(driverData);
-
+  
   } catch (e) {
     res.send(e);
   }
@@ -170,6 +169,24 @@ router.put('/update/:id', async (req, res) => {
 });
 
 
+router.delete('/cancel/:id', async (req, res) => {
+  const id = req.params.id
+  console.log(id);
+  console.log("============Cancel");
+  try{
+    const todo = await Ride.findOne({"requests._id":id})
+    console.log(todo);
+    console.log(todo.requests);
+    todo.requests.pull({ _id: id })
+    todo.save();
+    }catch(err)
+    {
+      console.log("======Errrr======Cancel");
+      console.log(err);
+    }
+  
+});
+
 router.delete('/delete/:id', async (req, res) => {
   const id = req.params.id
   console.log(id);
@@ -183,8 +200,8 @@ router.delete('/delete/:id', async (req, res) => {
   }).catch(err => {
     return res.status(500).json({ success: false, error: err })
   })
+  
 });
-
 
 
 router.put('/request/:id', authenticate, async (req, res) => {
@@ -193,13 +210,16 @@ router.put('/request/:id', authenticate, async (req, res) => {
   const email = await req['rootUser'].email;
   const userData = await req['rootUser'].name;
   const userDataa = await req['rootUser'].number;
-    await Ride.findByIdAndUpdate(id,
+  const passenger = "2";  
+  
+  await Ride.findByIdAndUpdate(id,
       {
         $addToSet: {
           requests: [
             {
               name: userData,
-              number: userDataa
+              number: userDataa,
+              passenger:passenger
             }
           ]
         },
@@ -221,6 +241,11 @@ router.put('/request/:id', authenticate, async (req, res) => {
 router.get('/home', authenticate, async (req, res) => {
   try {
     console.log('-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=--==-=----------------- hello');
+    let now = new Date();
+    var dateString = moment().subtract(1, 'days').format('YYYY-MM-DD');
+    await Ride.deleteMany({ date: dateString });
+    
+
     res.send({ rootUser: req['rootUser'] })
     console.log(req['rootUser'].email)
   } catch (e) {

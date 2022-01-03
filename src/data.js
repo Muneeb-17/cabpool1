@@ -1,32 +1,7 @@
-import React from 'react';
-import Select from 'react-select';
+import axios from 'axios';
 
-const options = [
-  { value: 'chocolate', label: 'Chocolate' },
-  { value: 'strawberry', label: 'Strawberry' },
-  { value: 'vanilla', label: 'Vanilla' },
-];
-
-class Data extends React.Component {
-  state = {
-    selectedOption: null,
-  };
-  handleChange = (selectedOption) => {
-    this.setState({ selectedOption }, () =>
-      console.log(`Option selected:`, this.state.selectedOption)
-    );
-  };
-  render() {
-    const { selectedOption } = this.state;
-
-    return (
-      <Select
-        value={selectedOption}
-        onChange={this.handleChange}
-        options={options}
-      />
-    );
-  }
-}
-
-export default Data;
+export default axios.create({
+  baseURL: 'https://reqres.in/api/users?page=2',
+  headers: {
+  },
+})

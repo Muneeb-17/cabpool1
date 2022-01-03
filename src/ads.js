@@ -52,18 +52,11 @@ const Ads = () => {
         const response = await fetch(`/request/${id}`, {
             method: 'PUT'
         })
-       console.log(response.status);
+        console.log(response.status);
         if (response.status === 200 || !response) {
             window.alert("Request Sent");
             setText(true);
-
-
         }
-        else {
-            window.alert('Not Sent')
-        }
-
-
     }
     useEffect(() => {
         getUser();
@@ -110,8 +103,8 @@ const Ads = () => {
                                             <div className="ml-3 w-100">
                                                 <div className="trainer-card-photo"></div>
                                                 <h4 className="trainer-name-title">{element.loginName}</h4>
-                                                <div class="row">
-                                                    <div class="col-6">
+                                                <div className="row">
+                                                    <div className="col-6">
                                                         <div className="origin">
                                                             <div><span><PlaceIcon /></span> <span className="origin1">{element.departure}</span> </div>
                                                             <MoreVertIcon />
@@ -123,7 +116,7 @@ const Ads = () => {
                                                             <div> <span><DriveEtaIcon /></span> <span className="destination1">{element.registration}</span> </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-6">
+                                                    <div className="col-6">
                                                         <div className="origin">
                                                             <div><span><CalendarTodayIcon /></span> <span className="origin1">{element.date}</span> </div>
                                                             <br />
@@ -134,25 +127,24 @@ const Ads = () => {
                                                             <div> <span><DriveEtaIcon /></span> <span className="origin1">{element.color}</span> </div>
                                                             <div> <span><PlaceIcon /></span><span className="destination1">{element.meetupPoint}</span> </div>
                                                         </div>
-
-
                                                     </div>
-
-
                                                 </div>
                                                 <hr class="dashed"></hr>
                                                 <div className="origin">
-                                                    <div> <span><AttachMoneyIcon /></span> <span className="origin1">{element.charges}</span> </div>
+                                                    <div> <span>RS</span> <span className="origin1">{element.charges}</span> </div>
+                                                    <label for="passenger">No. of Passenger:</label>
+  <select name="passenger" id="passenger">
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    </select>
                                                 </div>
                                                 <div>
-                                                    {text ?
-                                                        <div className="button:hover"><button className="button12">Cancel</button> </div>
-                                                        : <>
-                                                            <div className="button:hover"><button className="button12" onClick={() => {
-                                                                request(element._id);
-                                                            }}>Request</button> </div>
-                                                        </>
-                                                    }
+                                                    <div className="button:hover"><button className="button12" onClick={() => {
+                                                        request(element._id);
+                                                    }}>Request</button> </div>
+
+
                                                 </div>
                                             </div>
                                         </div>

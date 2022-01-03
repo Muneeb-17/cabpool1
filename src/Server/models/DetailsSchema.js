@@ -78,7 +78,11 @@ const DetailsSchema = new mongoose.Schema({
             number:{
                 type:Number,
                 require:true
-        }
+        },
+        passenger:{
+            type:Number,
+            require:true
+    }
     }
     ]
 
