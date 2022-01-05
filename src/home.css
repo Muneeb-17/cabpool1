@@ -42,7 +42,7 @@
 }
 
 .beam-img{
-  border-radius: 40px;
+  border-radius: 5px;
 
 }
 .cta-wrapper {
@@ -66,23 +66,20 @@
 
 .products-wrap {
   display: flex;
-  width: 70%;
-  padding-left: 70px;
-  padding-right: 70px;
-
+  flex-direction: column;
+  width: 80%;
 }
 
 .product-item {
+  
   align-items: center;
   display: flex;
-  flex-direction: column;
   background-color: rgb(218, 208, 208);
   margin-left: 20px;
   border-radius: 10px;
   margin-top: 20px;
-  width: 30%;
- 
-
+  flex-direction: column;
+  padding: 2%;
 }
 
 .product-item img {
@@ -104,10 +101,15 @@
   padding: 1.3rem 0.7rem;
   text-align: center;
   width: 11rem;
-  
+}
+.product-label{
+  font-size: large;
+  font-weight:bold;
+  color:#004D4B;
 }
 
-.products h1{
+
+/*.products h1{
   color: #26272b;
    display: flex;
    justify-content: center;
@@ -116,17 +118,18 @@
    margin-top:20px;
    text-decoration: underline;
   
-}
-li{
+}*/
+.product{
   color:#737373;
+  font-weight: bold;
   
 }
-.product-description p{
+/*.product-description p{
   font-size: larger;
   color:black;
   font-weight: bold;
 
-}
+}*/
 
 .sec h1{
   color:#004D4B;
@@ -168,6 +171,7 @@ li{
 
 
 }
+
 /* Clients-video */
 /* .project-bridge h2 {
   margin: 10%;

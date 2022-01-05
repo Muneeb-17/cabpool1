@@ -57,6 +57,9 @@ const Ads = () => {
             window.alert("Request Sent");
             setText(true);
         }
+        else if (response.status === 422 || !response){
+            window.alert("Authorization");
+        }
     }
     useEffect(() => {
         getUser();

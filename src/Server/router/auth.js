@@ -207,12 +207,14 @@ router.delete('/delete/:id', async (req, res) => {
 router.put('/request/:id', authenticate, async (req, res) => {
   const id = req.params.id;
   console.log(id);
-  const email = await req['rootUser'].email;
+  const rootId = await req['rootUser'].id;
   const userData = await req['rootUser'].name;
   const userDataa = await req['rootUser'].number;
   const passenger = "2";  
-  
-  await Ride.findByIdAndUpdate(id,
+  const data = await Ride.find({loginId:rootId})
+  console.log(data);
+  if (data == false) {
+    await Ride.findByIdAndUpdate(id,
       {
         $addToSet: {
           requests: [
@@ -224,7 +226,7 @@ router.put('/request/:id', authenticate, async (req, res) => {
           ]
         },
       },
-
+    
       function (err) {
         if (err) {
           console.log(err)
@@ -234,6 +236,11 @@ router.put('/request/:id', authenticate, async (req, res) => {
           console.log("Updated User : ");
         }
       })
+  
+  }
+  else {
+    return res.status(500).json({ error: "Email is Already is Registed" });
+  }
 })
 
 
