@@ -12,6 +12,7 @@ import myRide from './myRide';
 import AdsLogin from './AdsLogin';
 import Update from './update';
 import MyRequest from './myRequest';
+import SendRequest from './sendRequest';
 
 
 function App() {
@@ -32,7 +33,7 @@ function App() {
           <Route path='/adsLogin' exact component={AdsLogin} />
           <Route path='/update/:id' exact component={Update} />
           <Route path='/request' exact component={MyRequest} />
-         
+          <Route path='/sendRequest' exact component={SendRequest} />
 
 
 

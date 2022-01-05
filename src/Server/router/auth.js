@@ -212,8 +212,7 @@ router.put('/request/:id', authenticate, async (req, res) => {
   const userDataa = await req['rootUser'].number;
   const passenger = "2";  
   const data = await Ride.find({loginId:rootId})
-  console.log(data);
-  if (data == false) {
+   if (data == false) {
     await Ride.findByIdAndUpdate(id,
       {
         $addToSet: {
@@ -239,7 +238,7 @@ router.put('/request/:id', authenticate, async (req, res) => {
   
   }
   else {
-    return res.status(500).json({ error: "Email is Already is Registed" });
+     res.status(500).json({ error: "Request Not Sent:Authorization" });
   }
 })
 
@@ -251,8 +250,6 @@ router.get('/home', authenticate, async (req, res) => {
     let now = new Date();
     var dateString = moment().subtract(1, 'days').format('YYYY-MM-DD');
     await Ride.deleteMany({ date: dateString });
-    
-
     res.send({ rootUser: req['rootUser'] })
     console.log(req['rootUser'].email)
   } catch (e) {
@@ -284,7 +281,18 @@ router.get('/getData/:id', async (req, res) => {
   res.send(driverData);
 });
 
-
+router.get('/getRequest',authenticate, async (req,res) => {
+  console.log("-------------GetRequest");
+  try{
+  const request =  await req['rootUser'].name;
+ 
+  const find = await Ride.find({}).where({"requests.name":request})
+  console.log(find);
+  res.send(find);
+  }catch(err){
+    console.log(err);
+  }
+})
 
 
 module.exports = router;

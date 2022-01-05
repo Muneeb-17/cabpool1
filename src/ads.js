@@ -57,8 +57,8 @@ const Ads = () => {
             window.alert("Request Sent");
             setText(true);
         }
-        else if (response.status === 422 || !response){
-            window.alert("Authorization");
+        else if (response.status === 208){
+            window.alert("Already Sent");
         }
     }
     useEffect(() => {

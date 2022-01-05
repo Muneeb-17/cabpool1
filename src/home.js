@@ -70,6 +70,7 @@ callHome();
       <NavDropdown title={userData.name} id="collasible-nav-dropdown">
       <NavDropdown.Item href = "/logout">Logout</NavDropdown.Item>
       <NavDropdown.Item href = "/request">Requests</NavDropdown.Item>
+      <NavDropdown.Item href = "/sendRequest">Send Request</NavDropdown.Item>
         </NavDropdown>
     </Nav>
   </Navbar.Collapse>
