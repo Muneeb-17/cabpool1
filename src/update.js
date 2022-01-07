@@ -1,17 +1,14 @@
 import { useState, useEffect } from "react";
-import {useHistory,Link,NavLink} from "react-router-dom";
-import { Navbar,Dropdown} from 'react-bootstrap';
+import {useHistory} from "react-router-dom";
 import './login.css';
 import 'bootstrap/dist/css/bootstrap.css';
-import Navigation from "./navigation";
 import DriveEtaIcon from '@material-ui/icons/DriveEta';
-import PhoneIcon from '@material-ui/icons/Phone';
 import PlaceIcon from '@material-ui/icons/Place';
 import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
 import TimerIcon from '@material-ui/icons/Timer';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import NavigationLogin from "./Navigation2";
-const axios = require('axios').default;
+
 
 const Update=(props)=>{
     const history=useHistory();

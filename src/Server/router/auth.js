@@ -18,8 +18,24 @@ const authenticate = require('../middleware/authenticate');
 app.use(express.urlencoded({ extended: true }));
 const moment = require('moment');
 var ObjectId = require('mongodb').ObjectId; 
+const multer = require('multer');
 
+const path = require("path")
+app.use("./images", express.static(path.join(__dirname, "./images")));
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "images");
+  },
+  filename: (req, file, cb) => {
+    cb(null, req.body.name);
+  },
+});
 
+const upload = multer({ storage: storage });
+app.post("./src/server/router/upload", upload.single("file"), (req, res) => {
+  res.status(200).json("File has been uploaded");
+});
+//making images folder public
 
 router.post('/register', async (req, res) => {
   console.log('-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=--==-=----------------- register');
@@ -210,8 +226,9 @@ router.put('/request/:id', authenticate, async (req, res) => {
   const rootId = await req['rootUser'].id;
   const userData = await req['rootUser'].name;
   const userDataa = await req['rootUser'].number;
-  const passenger = "2";  
+  const passenger = req.body.passenger;  
   const data = await Ride.find({loginId:rootId})
+  console.log(data);
    if (data == false) {
     await Ride.findByIdAndUpdate(id,
       {
@@ -251,7 +268,24 @@ router.get('/home', authenticate, async (req, res) => {
     var dateString = moment().subtract(1, 'days').format('YYYY-MM-DD');
     await Ride.deleteMany({ date: dateString });
     res.send({ rootUser: req['rootUser'] })
-    console.log(req['rootUser'].email)
+    const rootUser1 = req['rootUser']._id;
+    console.log(rootUser1);
+   
+  } catch (e) {
+    console.log('-=-=-=-=-=-=-=-=- Eror =-=-=--=-=-=-=-==--==-=-');
+
+  }
+});
+router.put('/profile', authenticate, async (req, res) => {
+  try {
+   console.log("===========profile");
+    const rootUser1 = req['rootUser']._id;
+    console.log(rootUser1);
+    const userName = req.body.userName
+    const userNumber = req.body.userNumber;
+    const find = await User.findByIdAndUpdate(rootUser1, {name:userName,number:userNumber})
+    await find.save();
+   
   } catch (e) {
     console.log('-=-=-=-=-=-=-=-=- Eror =-=-=--=-=-=-=-==--==-=-');
 
@@ -283,15 +317,10 @@ router.get('/getData/:id', async (req, res) => {
 
 router.get('/getRequest',authenticate, async (req,res) => {
   console.log("-------------GetRequest");
-  try{
   const request =  await req['rootUser'].name;
- 
-  const find = await Ride.find({}).where({"requests.name":request})
-  console.log(find);
-  res.send(find);
-  }catch(err){
-    console.log(err);
-  }
+ const find = await Ride.find({"requests.name":request});
+    console.log(find.toString());
+    res.send(find);
 })
 
 

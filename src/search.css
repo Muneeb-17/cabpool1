@@ -332,3 +332,7 @@
   hr.dashed {
     border-top: 3px dashed #bbb;
   }
+
+  .passenger{
+    border-radius: 10px;
+  }

@@ -22,12 +22,11 @@ const SendRequest = () => {
                 credentials: "include"
             });
 
-
             const data = await response.json();
             console.log("=============myRequests");
+            getAds(data)
             console.log(data);
-            getAds(data);
-        
+           
             if (!response.status === 200) {
                 const error = new Error(response.error);
                 throw error;
@@ -77,7 +76,7 @@ const SendRequest = () => {
                                                 <div> <span>Date:</span> <span className="origin1">{element.date}</span> </div>
                                                 <div> <span>Time:</span> <span className="destination1">{element.time}</span> </div>
                                                 {element.requests.map((c, i) => (
-                                                       <div className="origin">
+                                                       <div className="origin" key={i.id}>
                                                            <b><p>My Request</p></b>
                                                        <div> <span>Name:</span><span className="origin1">{c.name}</span> </div>
                                                        <div> <span >Contact No:</span> <span className="destination1">{c.number}</span> </div>
@@ -85,7 +84,7 @@ const SendRequest = () => {
                                                       
                                                        <button className="button1" onClick={() => {
                                                            deleteRide(c._id);
-                                                       }}>Delete</button>
+                                                       }}>Caccel</button>
                                                    </div>
                                                      ))}
                                             </div>

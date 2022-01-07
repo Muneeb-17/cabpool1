@@ -13,6 +13,8 @@ import AdsLogin from './AdsLogin';
 import Update from './update';
 import MyRequest from './myRequest';
 import SendRequest from './sendRequest';
+import ContactUs from './contactUs';
+import Profile from './profile';
 
 
 function App() {
@@ -34,6 +36,8 @@ function App() {
           <Route path='/update/:id' exact component={Update} />
           <Route path='/request' exact component={MyRequest} />
           <Route path='/sendRequest' exact component={SendRequest} />
+          <Route path='/contactUs' exact component={ContactUs} />
+          <Route path="/profile" exact component={Profile} />
 
 
 

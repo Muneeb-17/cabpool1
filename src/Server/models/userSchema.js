@@ -30,6 +30,10 @@ const userSchema = new mongoose.Schema({
         type: Number,
         require: true
     },
+    image:{
+        type:String,
+        default:""
+    },
     tokens:[
         {
         token:{

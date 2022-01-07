@@ -102,7 +102,7 @@ class HomeDesign extends React.Component {
                 <h6>Quick Links</h6>
                 <ul className="footer-links">
                   <li><Link to ="./ads">About Us</Link></li>
-                  <li><Link to= './ads'>Contact Us</Link></li>
+                  <li><Link to= './contactUs'>Contact Us</Link></li>
                 </ul>
               </div>
             </div>

@@ -1,11 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { NavLink, useHistory } from "react-router-dom";
-import { Navbar, Offcanvas, Container, Nav, NavDropdown, Form, FormControl, Button } from 'react-bootstrap';
+import React from "react";
+import { NavLink} from "react-router-dom";
+import { Navbar, Container, Nav } from 'react-bootstrap';
 import SearchIcon from '@material-ui/icons/Search';
 import './login.css';
-import HomeDesign from './homeDesign';
-//import './home.css';
-
 
 class Navigation extends React.Component {
   render() {
@@ -19,6 +16,7 @@ class Navigation extends React.Component {
               <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="ms-auto">
                   <li className="nav item">
+               
                     <NavLink className="nav-link" to="/home">Home</NavLink>
                   </li>
                   <li className="nav item">

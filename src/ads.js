@@ -21,7 +21,15 @@ const Ads = () => {
     const [searcha, setSearcha] = useState('');
     const [date, setDate] = useState('');
     const [text, setText] = useState(false);
+    const [user, setUser] = useState({ passenger: "" });
 
+    let name, value;
+    const handleInputs = (e) => {
+        name = e.target.name;
+        value = e.target.value;
+
+        setUser({ ...user, [name]: value })
+    }
 
     const getUser = async () => {
         try {
@@ -37,6 +45,7 @@ const Ads = () => {
 
             const data = await response.body;
             console.log("=============ads");
+            setText(true);
             console.log(data);
 
             if (response.status !== 200) {
@@ -49,15 +58,22 @@ const Ads = () => {
         }
     }
     const request = async (id) => {
+        const { passenger } = user;
         const response = await fetch(`/request/${id}`, {
-            method: 'PUT'
-        })
+            method: 'PUT',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                passenger
+            })
+        });
         console.log(response.status);
         if (response.status === 200 || !response) {
             window.alert("Request Sent");
             setText(true);
         }
-        else if (response.status === 208){
+        else if (response.status === 208) {
             window.alert("Already Sent");
         }
     }
@@ -66,6 +82,7 @@ const Ads = () => {
         request();
     }, []);
     return (
+
         <div className="header">
             <NavigationLogin />
             <div>
@@ -128,7 +145,8 @@ const Ads = () => {
                                                         <hr class="dashed"></hr>
                                                         <div className="origin">
                                                             <div> <span><DriveEtaIcon /></span> <span className="origin1">{element.color}</span> </div>
-                                                            <div> <span><PlaceIcon /></span><span className="destination1">{element.meetupPoint}</span> </div>
+                                                            <div> <span><PlaceIcon /></span><span className="destination1" onClick={()=> window.open("https://www.google.com/maps/@31.5374909,74.354524,17z","_blank")}>{element.meetupPoint}</span>
+                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -136,11 +154,13 @@ const Ads = () => {
                                                 <div className="origin">
                                                     <div> <span>RS</span> <span className="origin1">{element.charges}</span> </div>
                                                     <label for="passenger">No. of Passenger:</label>
-  <select name="passenger" id="passenger">
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    </select>
+                                                    <select className="passenger"  name="passenger" id="passenger" value={user.passenger}
+                                                        onChange={handleInputs}>
+                                                        <option value="">Select</option>
+                                                        <option value="1">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                    </select>
                                                 </div>
                                                 <div>
                                                     <div className="button:hover"><button className="button12" onClick={() => {

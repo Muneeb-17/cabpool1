@@ -9,7 +9,6 @@ import PhoneIcon from '@material-ui/icons/Phone';
 import Navigation from "./navigation";
 const SignUp = () => {
       const history=useHistory();
-      // const {handleSubmit , register , error} = useForm();
 		const [user, setUser] = useState({
 			name: "", email: "", password: "", cpassword: "", number: ""
 		});

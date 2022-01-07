@@ -13,7 +13,7 @@ function Errorpage()
             <h2>We are sorry, page not found</h2>
             <p className="mb-5">
                 The page you are looking might have been removed
-                had its name changed or is temporarily unavailabl
+                had its name changed or is temporarily unavailable
             </p>
             <NavLink to="/">Baack to HomePage</NavLink>
         </div>

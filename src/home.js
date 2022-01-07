@@ -1,6 +1,6 @@
 import React,{ useEffect, useState } from "react";
 import {NavLink, useHistory } from "react-router-dom";
-import { Navbar,NavDropdown,Nav, Dropdown,Container} from 'react-bootstrap';
+import { Navbar,NavDropdown,Nav,Container} from 'react-bootstrap';
 import {Link} from "react-router-dom";
 import './login.css';
 import Navigation from "./navigation";
@@ -20,6 +20,8 @@ const HomePage = () => {
              },
                  credentials:"include"
              });
+
+
 
              console.log(' catching error ------ Body---------------------');
              console.log(res);
@@ -56,7 +58,7 @@ callHome();
   <Navbar.Collapse id="responsive-navbar-nav">
     <Nav className="ms-auto">
     <li className ="nav item">
-        <NavLink className="nav-link" to="/home">Home</NavLink>
+        <NavLink className="nav-link" to="/home">Home</NavLink  >
     </li> 
     <li className ="nav item">
         <NavLink className="nav-link" to="/ads">Ride</NavLink>
@@ -67,10 +69,15 @@ callHome();
     <li className ="nav item">
         <NavLink className="nav-link" to="/myRide">My Rides</NavLink>
     </li> 
+    <li className="nav item">
+                <a class="navbar-brand" href="#">
+    <img src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/logo_white.png" width="30" height="30" alt="logo"/></a>
+             </li>
       <NavDropdown title={userData.name} id="collasible-nav-dropdown">
-      <NavDropdown.Item href = "/logout">Logout</NavDropdown.Item>
       <NavDropdown.Item href = "/request">Requests</NavDropdown.Item>
       <NavDropdown.Item href = "/sendRequest">Send Request</NavDropdown.Item>
+      <NavDropdown.Item href = "/profile">Profile</NavDropdown.Item>
+      <NavDropdown.Item href = "/logout">Logout</NavDropdown.Item>
         </NavDropdown>
     </Nav>
   </Navbar.Collapse>

@@ -46,7 +46,8 @@ const MyRequest = () => {
         }).then(() => {
             getUser(
                 ads.filter((item) => {
-                    return item._id !== id;
+                    item.requests.filter((items) => {
+                    return items._id !== id;})
                 })
             )
         })
@@ -80,9 +81,7 @@ const MyRequest = () => {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="header">
-                                    <div className="container mt-5 ">
-                                        <div className="row text-center">
+                               
                                             {element.requests.map((c, i) => (
                                                 <div className="col-10 col-md-4 mt-5" key={i}>
                                                     <div className="card-login">
@@ -100,7 +99,7 @@ const MyRequest = () => {
                                                                     }
                                                                     <button className="button1" onClick={() => {
                                                                         deleteRide(c._id);
-                                                                    }}>Delete</button>
+                                                                    }}>Cancel</button>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -108,9 +107,7 @@ const MyRequest = () => {
                                                 </div>
                                             ))}
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
+                                   
                         )
                         }
                     </div>
