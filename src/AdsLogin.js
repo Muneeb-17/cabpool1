@@ -10,6 +10,7 @@ import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
 import DriveEtaIcon from '@material-ui/icons/DriveEta';
 import PhoneAndroidIcon from '@material-ui/icons/PhoneAndroid';
 import TimerIcon from '@material-ui/icons/Timer';
+import Pic from '../src/Server/images/image.jpg';
 import './search.css';
 const moment = require('moment');
 
@@ -20,6 +21,7 @@ const AdsLogin = () =>{
     const history = useHistory();
     const[ads,getAds] = useState([]);
     const [search ,setSearch] = useState('');
+    const PF = "http://localhost:5000/images/"
     const [searcha,setSearcha] = useState('');
     const [date , setDate] = useState('');
     const getUser = async () => {
@@ -93,7 +95,10 @@ const AdsLogin = () =>{
                     <div className="card-login">
             <div className="d-flex align-items-center">
             <div className="ml-3 w-100">
-                <div className="trainer-card-photo"></div>
+               <img className="adsImage" src={PF+element.image}  onError={({ currentTarget }) => {
+    currentTarget.onerror = null; // prevents looping
+    currentTarget.src="https://www.seekpng.com/png/detail/966-9665317_placeholder-image-person-jpg.png"
+  }} width="80" height="80"/>
                 <h4 className="trainer-name-title">{element.loginName}</h4>   
                 <div className="origin">
                     <div> <span><PlaceIcon/></span><span className="origin1">{element.departure}</span> </div>

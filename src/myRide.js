@@ -20,6 +20,7 @@ const axios = require('axios').default;
 const MyRide = () => {
     const history = useHistory();
     const [ads, getAds] = useState([]);
+    const PF = "http://localhost:5000/images/"
 
     
 
@@ -85,7 +86,10 @@ const MyRide = () => {
                          <div className="trainer-card">
                              <div className="d-flex align-items-center">
                                  <div className="ml-3 w-100">
-                                     <div className="trainer-card-photo"></div>
+                                 <img className="adsImage" src={PF+element.image}  onError={({ currentTarget }) => {
+    currentTarget.onerror = null; // prevents looping
+    currentTarget.src="https://www.seekpng.com/png/detail/966-9665317_placeholder-image-person-jpg.png"
+  }} width="80" height="80"/>
                                      <h4 className="trainer-name-title">{element.loginName}</h4>
                                      <div class="row">
                                      <div class="col-6">

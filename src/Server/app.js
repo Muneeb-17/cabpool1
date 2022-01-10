@@ -10,13 +10,14 @@ dotenv.config({path:'./config.env'});
 require('./DB/conn');
 const cookieParser = require('cookie-parser');
 app.use(cookieParser());
+
 app.use(
     bodyParser.urlencoded({
       extended: false
     })
   );
   app.use(bodyParser.json());
-
+app.use("/images", express.static("./images"));
 
 app.listen(5000, () =>{
     console.log('server is running' ); 

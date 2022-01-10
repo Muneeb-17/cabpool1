@@ -84,7 +84,7 @@ const SendRequest = () => {
                                                       
                                                        <button className="button1" onClick={() => {
                                                            deleteRide(c._id);
-                                                       }}>Caccel</button>
+                                                       }}>Cancel</button>
                                                    </div>
                                                      ))}
                                             </div>

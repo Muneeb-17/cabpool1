@@ -15,6 +15,7 @@ import MyRequest from './myRequest';
 import SendRequest from './sendRequest';
 import ContactUs from './contactUs';
 import Profile from './profile';
+import HomeLogin from './homelogin';
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
       <div>
         <Switch>
           <Route path="/home" exact component={HomePage} />
+          <Route path="/" exact component={HomeLogin} />
           <Route path="/login" exact component={Login} />
           <Route path="/SignUp" exact component={signUp} />
           <Route path="/rideDetails" exact component={rideDetails} />

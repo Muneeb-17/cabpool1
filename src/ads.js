@@ -16,6 +16,7 @@ import './search.css';
 
 const Ads = () => {
     const history = useHistory();
+    const PF = "http://localhost:5000/images/"
     const [ads, getAds] = useState([]);
     const [search, setSearch] = useState('');
     const [searcha, setSearcha] = useState('');
@@ -46,7 +47,7 @@ const Ads = () => {
             const data = await response.body;
             console.log("=============ads");
             setText(true);
-            console.log(data);
+            console.log(data.image);
 
             if (response.status !== 200) {
                 const error = new Error(response.error);
@@ -121,7 +122,10 @@ const Ads = () => {
                                     <div className="trainer-card">
                                         <div className="d-flex align-items-center">
                                             <div className="ml-3 w-100">
-                                                <div className="trainer-card-photo"></div>
+                                                <img className="adsImage" src={PF + element.image} onError={({ currentTarget }) => {
+                                                    currentTarget.onerror = null; // prevents looping
+                                                    currentTarget.src = "https://www.seekpng.com/png/detail/966-9665317_placeholder-image-person-jpg.png"
+                                                }} width="80" height="80" />
                                                 <h4 className="trainer-name-title">{element.loginName}</h4>
                                                 <div className="row">
                                                     <div className="col-6">
@@ -145,8 +149,8 @@ const Ads = () => {
                                                         <hr class="dashed"></hr>
                                                         <div className="origin">
                                                             <div> <span><DriveEtaIcon /></span> <span className="origin1">{element.color}</span> </div>
-                                                            <div> <span><PlaceIcon /></span><span className="destination1" onClick={()=> window.open("https://www.google.com/maps/@31.5374909,74.354524,17z","_blank")}>{element.meetupPoint}</span>
-                                                             </div>
+                                                            <div> <span><PlaceIcon /></span><span className="destination1" onClick={() => window.open("https://www.google.com/maps/@31.5374909,74.354524,17z", "_blank")}>{element.meetupPoint}</span>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -154,7 +158,7 @@ const Ads = () => {
                                                 <div className="origin">
                                                     <div> <span>RS</span> <span className="origin1">{element.charges}</span> </div>
                                                     <label for="passenger">No. of Passenger:</label>
-                                                    <select className="passenger"  name="passenger" id="passenger" value={user.passenger}
+                                                    <select className="passenger" name="passenger" id="passenger" value={user.passenger}
                                                         onChange={handleInputs}>
                                                         <option value="">Select</option>
                                                         <option value="1">1</option>

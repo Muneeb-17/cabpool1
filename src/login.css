@@ -113,3 +113,11 @@ background-color: white;
 .suggestion:hover{
     background: gray;
 }
+
+.homeImage{
+    border-radius: 20px;
+}
+
+.Save{
+    text-align: center;
+}

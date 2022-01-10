@@ -72,6 +72,9 @@ const DetailsSchema = new mongoose.Schema({
         type: String,
         require: true
     },
+    image: {
+        type: String,
+    },
     requests:[
        {
             name:reqString,

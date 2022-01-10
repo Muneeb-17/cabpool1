@@ -19,21 +19,41 @@ app.use(express.urlencoded({ extended: true }));
 const moment = require('moment');
 var ObjectId = require('mongodb').ObjectId; 
 const multer = require('multer');
+const path = require('path');
+var http = require('http');
 
-const path = require("path")
-app.use("./images", express.static(path.join(__dirname, "./images")));
+var nStatic = require('node-static');
+const { log } = require('console');
+
+var fileServer = new nStatic.Server('./images');
+
+//app.use(express.static('./images'));
+
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "images");
+    cb(null, "./images");
   },
   filename: (req, file, cb) => {
-    cb(null, req.body.name);
+    cb(null, file.fieldname+"_"+Date.now()+path.extname(file.originalname));
   },
 });
 
-const upload = multer({ storage: storage });
-app.post("./src/server/router/upload", upload.single("file"), (req, res) => {
-  res.status(200).json("File has been uploaded");
+const upload = multer({ storage: storage })
+
+//app.use('/images', express.static(path.join(__dirname,'../images')));
+
+
+router.put('/profile' ,upload.single('photo'), authenticate, async(req,res)=>{
+ const success = req.file.filename+"uploaded successfully";
+try{
+ const loginData = await req['rootUser'].id;
+ const upload = await User.findByIdAndUpdate(loginData,{
+   image:req.file.filename,
+ })
+}catch(e){
+  console.log(e);
+}
+
 });
 //making images folder public
 
@@ -122,9 +142,10 @@ router.post('/rideDetails', authenticate, async (req, res) => {
       const loginData = await req['rootUser'].id;
       const loginUserName = await req['rootUser'].name;
       const loginEmail = await req['rootUser'].email;
+      const loginImage = await req['rootUser'].image;
       console.log(loginUserName);
       console.log("=========================");
-      const userData = new Ride({ loginId: loginData, loginName: loginUserName, userName: loginEmail, departure, destination, date, time, number, registration, color, meetupPoint, charges });
+      const userData = new Ride({ loginId: loginData, loginName: loginUserName, userName: loginEmail, image:loginImage, departure, destination, date, time, number, registration, color, meetupPoint, charges });
       const allAds = new Driver({ userName: loginUserName, departure, destination, date, time, number, registration, color, meetupPoint, charges });
       console.log("=====================12121====");
       await userData.save();
@@ -262,35 +283,54 @@ router.put('/request/:id', authenticate, async (req, res) => {
 
 //home
 router.get('/home', authenticate, async (req, res) => {
-  try {
+  
     console.log('-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=--==-=----------------- hello');
     let now = new Date();
     var dateString = moment().subtract(1, 'days').format('YYYY-MM-DD');
     await Ride.deleteMany({ date: dateString });
-    res.send({ rootUser: req['rootUser'] })
-    const rootUser1 = req['rootUser']._id;
-    console.log(rootUser1);
-   
-  } catch (e) {
-    console.log('-=-=-=-=-=-=-=-=- Eror =-=-=--=-=-=-=-==--==-=-');
-
-  }
+    res.send({ rootUser: req['rootUser']})
+    
 });
-router.put('/profile', authenticate, async (req, res) => {
+
+router.put('/password', authenticate, async(req,res)=>{
+
   try {
-   console.log("===========profile");
-    const rootUser1 = req['rootUser']._id;
-    console.log(rootUser1);
-    const userName = req.body.userName
-    const userNumber = req.body.userNumber;
-    const find = await User.findByIdAndUpdate(rootUser1, {name:userName,number:userNumber})
-    await find.save();
-   
-  } catch (e) {
-    console.log('-=-=-=-=-=-=-=-=- Eror =-=-=--=-=-=-=-==--==-=-');
+    console.log("===========profile");
+     const rootUser1 = req['rootUser']._id;
+     const userName = req.body.userName
+     const password = req.body.password;
+     const cpassword = req.body.cpassword;
+     const oldPassword = req.body.oldPassword;
+         const newpass = await bcrypt.hash(password,12);
+         const newCpass = await bcrypt.hash(cpassword,12);
+         
+         const match = await User.findById(rootUser1)
+         if(match)
+        {
+         const isMatch =  await bcrypt.compare(oldPassword , match.password)
+         if(isMatch)
+         {
+          const find = await User.findByIdAndUpdate(rootUser1, {
+              password:newpass,
+              cpassword:newCpass,
+          },
+            { new: true });
+          res.status(200).json({message: "Save Changes"});
+         }
+         else {
+           return  res.status(201).json({ error: "Wrong Password" });
+         }
 
+        }
   }
-});
+ catch (e) {
+  console.log('-=-=-=-=-=-=-=-=- Eror =-=-=--=-=-=-=-==--==-=-');
+  res.status(500).json(e);
+  console.log(e);
+
+}
+
+})
 
 router.get('/logout', (req, res) => {
   console.log('-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=--==-=----------------- logout');

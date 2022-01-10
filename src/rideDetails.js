@@ -12,11 +12,7 @@ import TimerIcon from '@material-ui/icons/Timer';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import NavigationLogin from "./Navigation2";
 
-const options = [
-    { value: 'chocolate', label: 'Chocolate' },
-    { value: 'strawberry', label: 'Strawberry' },
-    { value: 'vanilla', label: 'Vanilla' }
-  ]
+
 const RideDetails=()=>{
 
    
@@ -168,7 +164,7 @@ const RideDetails=()=>{
             <div className="feilds">
             <div className="input-group form-group">
                 <div className="input-group-prepend">
-                    <span className="input-group-text"><DriveEtaIcon /></span>
+                    <span className="input-group-text"><PhoneIcon /></span>
                 </div>
                 <input type="Number" name="number" id="number"  className="form-control"
                 value={user.number}

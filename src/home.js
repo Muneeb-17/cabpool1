@@ -1,14 +1,15 @@
 import React,{ useEffect, useState } from "react";
 import {NavLink, useHistory } from "react-router-dom";
 import { Navbar,NavDropdown,Nav,Container} from 'react-bootstrap';
-import {Link} from "react-router-dom";
 import './login.css';
 import Navigation from "./navigation";
 import HomeDesign from './homeDesign.js';
 
 const HomePage = () => {
     const history = useHistory();
+    const PF = "http://localhost:5000/images/"
     const [userData , setUserData] = useState({});
+    const [userImage , setUserImage] = useState({});
     const [show , setShow] = useState(false);
     const callHome = async() => {
         try{
@@ -30,15 +31,17 @@ const HomePage = () => {
              console.log(data);
              console.log(data.rootUser.name);
              setUserData({name: data.rootUser.name});
+             setUserImage({image:data.rootUser.image})
+             console.log( setUserImage({image:data.rootUser.image}));
              setShow(true);
-
+             
             
              console.log(res.status);
             }catch(err)
             {
                 console.log(err);
                // console.log(' redirect --==-=-=-=-=-=-=-=-=-=-=--==-=-=');
-               // history.push('/login');
+                history.push('/login');
 
             }
     }
@@ -71,7 +74,10 @@ callHome();
     </li> 
     <li className="nav item">
                 <a class="navbar-brand" href="#">
-    <img src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/logo_white.png" width="30" height="30" alt="logo"/></a>
+                <img className="adsImage" src={PF+userImage.image}  onError={({ currentTarget }) => {
+    currentTarget.onerror = null; // prevents looping
+    currentTarget.src="https://www.seekpng.com/png/detail/966-9665317_placeholder-image-person-jpg.png"
+  }} width="30" height="30"/></a>
              </li>
       <NavDropdown title={userData.name} id="collasible-nav-dropdown">
       <NavDropdown.Item href = "/request">Requests</NavDropdown.Item>
