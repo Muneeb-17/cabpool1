@@ -27,7 +27,6 @@ const { log } = require('console');
 
 var fileServer = new nStatic.Server('./images');
 
-//app.use(express.static('./images'));
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -128,7 +127,7 @@ router.post('/login', async (req, res) => {
 
 
 
-router.post('/rideDetails', authenticate, async (req, res) => {
+router.post('/rideDetails',authenticate, async (req, res) => {
   try {
 
     console.log('-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=--==-=----------------- rideDetails post');
@@ -160,6 +159,7 @@ router.post('/rideDetails', authenticate, async (req, res) => {
   }
 });
 
+
 router.get('/rideDetails', authenticate, async (req, res) => {
   console.log('-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=--==-=----------------- rideDetails');
   try {
@@ -171,6 +171,8 @@ router.get('/rideDetails', authenticate, async (req, res) => {
     res.send(e);
   }
 });
+
+
 router.get('/myRide', authenticate, async (req, res) => {
   console.log('-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=--==-=----------------- myRide');
   try {
@@ -185,6 +187,7 @@ router.get('/myRide', authenticate, async (req, res) => {
     res.send(e);
   }
 });
+
 
 router.put('/update/:id', async (req, res) => {
   console.log("=================update");
@@ -240,6 +243,17 @@ router.delete('/delete/:id', async (req, res) => {
   
 });
 
+router.put('/accept/:id', authenticate, async (req, res) => {
+  const id = req.params.id;
+  console.log(id);
+  const accept = "Accepted"; 
+  const requestFind = await Ride.findOne({"requests._id":id});
+ // requestFind.requests.addToSet({accept:accept});
+    // requestFind.save();
+   
+})
+
+
 
 router.put('/request/:id', authenticate, async (req, res) => {
   const id = req.params.id;
@@ -258,7 +272,7 @@ router.put('/request/:id', authenticate, async (req, res) => {
             {
               name: userData,
               number: userDataa,
-              passenger:passenger
+              passenger:passenger,
             }
           ]
         },
@@ -359,8 +373,8 @@ router.get('/getRequest',authenticate, async (req,res) => {
   console.log("-------------GetRequest");
   const request =  await req['rootUser'].name;
  const find = await Ride.find({"requests.name":request});
-    console.log(find.toString());
-    res.send(find);
+ res.send(find);
+  
 })
 
 

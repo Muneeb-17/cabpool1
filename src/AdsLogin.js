@@ -98,7 +98,7 @@ const AdsLogin = () =>{
                <img className="adsImage" src={PF+element.image}  onError={({ currentTarget }) => {
     currentTarget.onerror = null; // prevents looping
     currentTarget.src="https://www.seekpng.com/png/detail/966-9665317_placeholder-image-person-jpg.png"
-  }} width="80" height="80"/>
+  }} width="80" height="80"/><br/>
                 <h4 className="trainer-name-title">{element.loginName}</h4>   
                 <div className="origin">
                     <div> <span><PlaceIcon/></span><span className="origin1">{element.departure}</span> </div>

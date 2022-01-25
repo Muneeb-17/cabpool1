@@ -7,16 +7,16 @@ const User = require('./userSchema');
 dotenv.config({ path: './config.env' });
 
 const reqString = {
-    type:String,
+    type: String,
     require: true
 }
 
 const requestName = mongoose.Schema(
     {
-        name:reqString,
-        number:{
-            type:Number,
-            require:true
+        name: reqString,
+        number: {
+            type: Number,
+            require: true
         }
     }
 )
@@ -75,18 +75,22 @@ const DetailsSchema = new mongoose.Schema({
     image: {
         type: String,
     },
-    requests:[
-       {
-            name:reqString,
-            number:{
-                type:Number,
-                require:true
-        },
-        passenger:{
-            type:Number,
-            require:true
-    }
-    }
+    requests: [
+        {
+            name: reqString,
+            number: {
+                type: Number,
+                require: true
+            },
+            accept:{
+                type:String,
+                require: true
+            },
+            passenger: {
+                type: Number,
+                require: true
+            },
+        }
     ]
 
 })

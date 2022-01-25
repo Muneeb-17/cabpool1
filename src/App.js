@@ -16,6 +16,7 @@ import SendRequest from './sendRequest';
 import ContactUs from './contactUs';
 import Profile from './profile';
 import HomeLogin from './homelogin';
+import Payment from './payment';
 
 
 function App() {
@@ -40,6 +41,7 @@ function App() {
           <Route path='/sendRequest' exact component={SendRequest} />
           <Route path='/contactUs' exact component={ContactUs} />
           <Route path="/profile" exact component={Profile} />
+          <Route path= "/payment" exact component={Payment}/>
 
 
 

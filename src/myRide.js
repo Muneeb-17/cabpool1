@@ -123,7 +123,7 @@ const MyRide = () => {
                                              </div>
                                              <hr class="dashed"></hr>
                                              <div className="origin">
-                                                 <div> <span><AttachMoneyIcon /></span> <span className="origin1">{element.charges}</span> </div>
+                                                 <div> <span>RS</span> <span className="origin1">{element.charges}</span> </div>
                                              </div>
                                              
                                              

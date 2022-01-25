@@ -14,7 +14,7 @@ const HomePage = () => {
     const callHome = async() => {
         try{
              const res = await fetch('/home', {
-                 method:"GET",
+                 method:"GET",  
                  headers:{
                      Accept: "application/json",
                      "Content-Type": "application/json"

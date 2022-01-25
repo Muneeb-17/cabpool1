@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory ,Link } from "react-router-dom";
 import { Navbar } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Navigation2 from "./Navigation2";
 import './search.css';
+import './popup.css';
 const moment = require('moment');
 
 
@@ -38,9 +40,16 @@ const MyRequest = () => {
             history.push('/login');
         }
     }
-    const accept = async () => {
+
+    
+    const accept = async (id) => {
+        fetch(`/accept/${id}`,{
+            method: 'PUT'
+        })
         setText(true);
     }
+
+
     const deleteRide = async (id) => {
         fetch(`/cancel/${id}`, {
             method: 'DELETE'
@@ -96,7 +105,20 @@ const MyRequest = () => {
                                                                     <div> <span >Contact No:</span> <span className="destination1">{c.number}</span> </div>
                                                                     <div> <span >No of Passenger:</span> <span className="destination1">{c.passenger}</span> </div>
                                                                     {text ?
-                                                                        <button className="button1">End Trip</button>
+                                                                     <>
+                                                                            <a href="#popup1">End Trip</a>
+                                                                        <div id="popup1" class="overlay">
+                                                                                <div class="popup">
+                                                                                    <h2>Payment</h2>
+                                                                                    <a class="close" href="#">&times;</a>
+                                                                                    <>
+                                                                                 <Link to ="/payment"><button type="button" class="btn btn-dark">Cash </button></Link>
+                                                                                    <></>
+                                                                                    <button type="button" class="btn btn-dark">Credit </button>
+                                                                                    </>
+                                                                                   
+                                                                                </div>
+                                                                            </div></>
                                                                         : <button className="button12" onClick={() => {
                                                                             accept(c._id);
                                                                         }}>Accept</button>
