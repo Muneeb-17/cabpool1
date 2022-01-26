@@ -75,6 +75,10 @@ const DetailsSchema = new mongoose.Schema({
     image: {
         type: String,
     },
+    payment:{
+        type: Number,
+        require: true
+    },
     requests: [
         {
             name: reqString,

@@ -144,7 +144,7 @@ router.post('/rideDetails',authenticate, async (req, res) => {
       const loginImage = await req['rootUser'].image;
       console.log(loginUserName);
       console.log("=========================");
-      const userData = new Ride({ loginId: loginData, loginName: loginUserName, userName: loginEmail, image:loginImage, departure, destination, date, time, number, registration, color, meetupPoint, charges });
+      const userData = new Ride({ loginId: loginData, loginName: loginUserName, userName: loginEmail, image:loginImage, departure, destination, date, time, number, registration, color, meetupPoint, charges,payment:"0" });
       const allAds = new Driver({ userName: loginUserName, departure, destination, date, time, number, registration, color, meetupPoint, charges });
       console.log("=====================12121====");
       await userData.save();
@@ -376,6 +376,52 @@ router.get('/getRequest',authenticate, async (req,res) => {
  res.send(find);
   
 })
+
+
+router.put('/payment/:id', authenticate, async(req,res) => {
+  console.log("=================payment");
+  const id = req.params.id;
+  console.log(id);
+  try {
+    const payments = req.body.payment;
+    const getPayment = await Ride.findById(id);
+    const addPayment = +getPayment.payment + +payments;
+     console.log(payments);
+     console.log(addPayment);
+    
+      await Ride.findByIdAndUpdate(id, {
+        payment:addPayment
+      },
+        { new: true }
+      );
+    
+    res.status(200).json(updateResult);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+})
+
+router.put('/rating/:id',authenticate, async(req,res)=>{
+  console.log("=================update");
+  const id = req.params.id;
+  console.log(id);
+  try {
+   const rating = req.body.rating;
+   console.log(rating);
+    const updateResult = await User.findByIdAndUpdate(id, {
+          
+      rating:rating
+    },
+    {new:true}
+    );
+
+    res.status(200).json(updateResult);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+})
+
+
 
 
 module.exports = router;

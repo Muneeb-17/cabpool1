@@ -127,9 +127,9 @@ const MyRide = () => {
                                              </div>
                                              
                                              
-                                             <button className="button12" onClick={() => {
-                                 history.push("/update/" + element._id )
-                             }}>Edit</button>
+                                                <button className="button12" onClick={() => {
+                                    history.push("/update/" + element._id )
+                                }}>Edit</button>
                               <button className="button1" onClick={() => {
                                  deleteRide(element._id);
                              }}>Delete</button> </div>

@@ -17,6 +17,7 @@ import ContactUs from './contactUs';
 import Profile from './profile';
 import HomeLogin from './homelogin';
 import Payment from './payment';
+import Rating from './rating';
 
 
 function App() {
@@ -42,6 +43,7 @@ function App() {
           <Route path='/contactUs' exact component={ContactUs} />
           <Route path="/profile" exact component={Profile} />
           <Route path= "/payment" exact component={Payment}/>
+          <Route path = '/rating/:id' exact component={Rating}/>
 
 
 

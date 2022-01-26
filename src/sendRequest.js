@@ -85,6 +85,9 @@ const SendRequest = () => {
                                                        <button className="button1" onClick={() => {
                                                            deleteRide(c._id);
                                                        }}>Cancel</button>
+                                                           <button className="button12" onClick={() => {
+                                    history.push("/rating/" + element.loginId )
+                                }}>Give Rating</button>
                                                    </div>
                                                      ))}
                                             </div>
