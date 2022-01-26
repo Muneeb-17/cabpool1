@@ -11,6 +11,7 @@ import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
 import DriveEtaIcon from '@material-ui/icons/DriveEta';
 import PhoneAndroidIcon from '@material-ui/icons/PhoneAndroid';
 import TimerIcon from '@material-ui/icons/Timer';
+import StarOutlineIcon from '@material-ui/icons/StarOutline';
 import './search.css';
 
 
@@ -126,7 +127,7 @@ const Ads = () => {
                                                     currentTarget.onerror = null; // prevents looping
                                                     currentTarget.src = "https://www.seekpng.com/png/detail/966-9665317_placeholder-image-person-jpg.png"
                                                 }} width="80" height="80" />
-                                                <h4 className="trainer-name-title">{element.loginName}</h4>
+                                                <h4 className="trainer-name-title">{element.loginName}&ensp;<StarOutlineIcon/>{element.rating}</h4>
                                                 <div className="row">
                                                     <div className="col-6">
                                                         <div className="origin">

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useHistory ,Link } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.css';
 import Navigation2 from "./Navigation2";
 import { Card } from 'react-bootstrap';
@@ -31,7 +31,7 @@ const Payment = () => {
             const data = await response.json();
             getads(data);
             console.log("=============ads");
-         
+
             if (!response.status === 200) {
                 const error = new Error(response.error);
                 throw error;
@@ -66,26 +66,35 @@ const Payment = () => {
                         <h1>Payment</h1>
                         <p class="price">Rs {element.charges}</p>
                         <input className="textFeild" type="text" id="payment" name="payment" value={user.payment}
-                        onChange={handleInputs} /><br/>
+                            onChange={handleInputs} /><br />
                         {/* <p><Link to ='#popup1'><button className="paymentButton" onClick={() => {
                             payment(element._id);
                         }}>Add</button></Link></p> */}
+                        
                         <a href="#popup1" className="paymentButton" onClick={() => {
-                            payment(element._id);
-                        }}>Save</a>
-                        <div id="popup1" class="overlay">
-                                                                <div class="popup">
-                                                                    <h2>Payment</h2>
-                                                                    <a class="close" href="#">&times;</a>
-                                                                    <>
-                                                                        <Link to="/rating"><button type="button" className="buttonPayment">Give Rating </button></Link>
-                                                                       <Link to='/home'> <button type="button" className="buttonPopup">Go Back</button></Link>
-                                                                    </>
+                                payment(element._id);
+                            } }>Save</a><div id="popup1" class="overlay">
+                                    <div class="popup">
+                                        <h2>Payment</h2>
+                                        <a class="close" href="#">&times;</a>
+                                        <>
+                                            {/* <Link to="/rating/+ID"><button type="button" className="buttonPayment">Give Rating </button></Link> */}
+                                            {element.requests.map((c, i) => (
+                                            <><button className="buttonPayment" onClick={() => {
+                                                    history.push("/rating/" + c.ID);
+                                                }}>Rate {c.name}</button>
+                                                 </>
+                                                ))}
+                                                <Link to='/home'> <button type="button" className="buttonPopup">Go Back</button></Link>
+                                               
+                                        </>
 
-                                                                </div>
-                                                            </div>
-                        <p><Link to ='/request'><button className="paymentButton">Cancel</button></Link></p>
+                                    </div>
+                                </div>
+
+                        <p><Link to='/request'><button className="paymentButton">Cancel</button></Link></p>
                     </div>
+                        
                 )}
             </div>
         </>

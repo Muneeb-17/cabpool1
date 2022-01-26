@@ -142,9 +142,10 @@ router.post('/rideDetails',authenticate, async (req, res) => {
       const loginUserName = await req['rootUser'].name;
       const loginEmail = await req['rootUser'].email;
       const loginImage = await req['rootUser'].image;
+      const rating = await req['rootUser'].rating;
       console.log(loginUserName);
       console.log("=========================");
-      const userData = new Ride({ loginId: loginData, loginName: loginUserName, userName: loginEmail, image:loginImage, departure, destination, date, time, number, registration, color, meetupPoint, charges,payment:"0" });
+      const userData = new Ride({ loginId: loginData, loginName: loginUserName, userName: loginEmail, image:loginImage, rating:rating,departure, destination, date, time, number, registration, color, meetupPoint, charges,payment:"0" });
       const allAds = new Driver({ userName: loginUserName, departure, destination, date, time, number, registration, color, meetupPoint, charges });
       console.log("=====================12121====");
       await userData.save();
@@ -270,6 +271,7 @@ router.put('/request/:id', authenticate, async (req, res) => {
         $addToSet: {
           requests: [
             {
+              ID:rootId,
               name: userData,
               number: userDataa,
               passenger:passenger,
@@ -410,7 +412,7 @@ router.put('/rating/:id',authenticate, async(req,res)=>{
    console.log(rating);
     const updateResult = await User.findByIdAndUpdate(id, {
           
-      rating:rating
+      rating:rating*5/5
     },
     {new:true}
     );

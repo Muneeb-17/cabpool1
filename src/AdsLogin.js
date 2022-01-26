@@ -1,16 +1,12 @@
 import React, { useEffect, useState} from "react";
 import {useHistory,Link} from "react-router-dom";
-import { Navbar} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 import Navigation from "./navigation";
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import PlaceIcon from '@material-ui/icons/Place';
 import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
-import DriveEtaIcon from '@material-ui/icons/DriveEta';
-import PhoneAndroidIcon from '@material-ui/icons/PhoneAndroid';
 import TimerIcon from '@material-ui/icons/Timer';
-import Pic from '../src/Server/images/image.jpg';
+import StarOutlineIcon from '@material-ui/icons/StarOutline';
 import './search.css';
 const moment = require('moment');
 
@@ -99,7 +95,7 @@ const AdsLogin = () =>{
     currentTarget.onerror = null; // prevents looping
     currentTarget.src="https://www.seekpng.com/png/detail/966-9665317_placeholder-image-person-jpg.png"
   }} width="80" height="80"/><br/>
-                <h4 className="trainer-name-title">{element.loginName}</h4>   
+                <h4 className="trainer-name-title">{element.loginName}&ensp;<StarOutlineIcon/>{element.rating}</h4>   
                 <div className="origin">
                     <div> <span><PlaceIcon/></span><span className="origin1">{element.departure}</span> </div>
                     <MoreVertIcon />

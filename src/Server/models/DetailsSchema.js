@@ -79,8 +79,15 @@ const DetailsSchema = new mongoose.Schema({
         type: Number,
         require: true
     },
+    rating:{
+        type: Number,
+        require: true
+    },
     requests: [
-        {
+        {  ID:{
+            type:String,
+            require:true
+        },
             name: reqString,
             number: {
                 type: Number,
