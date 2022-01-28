@@ -36,6 +36,15 @@ const DetailsSchema = new mongoose.Schema({
         type: String,
         require: true
     },
+
+    idCard: {
+        type: Number,
+        require: true
+    },
+    carEngine:{
+        type: String,
+        require: true
+    },
     departure: {
         type: String,
         require: true

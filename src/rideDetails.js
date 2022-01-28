@@ -19,7 +19,7 @@ const RideDetails=()=>{
     const history=useHistory();
     const [complete , setComplete] = useState([]);
     const [user, setUser] = useState({
-      userName:"", departure: "",destination: "",date: "", time: "", number: "", registration: "", color: "", meetupPoint: "", charges: ""
+      userName:"", departure: "",destination: "",date: "", time: "", number: "", registration: "", color: "", meetupPoint: "", charges: "",idCard: "",carEngine: ""
     });
     let name,value;
     const handleInputs = (e) =>
@@ -61,14 +61,14 @@ const RideDetails=()=>{
     });
      const PostData = async (e)=>{
          e.preventDefault();
-         const {userName,departure,destination,date,time,number,registration,color,meetupPoint,charges}=user;
+         const {userName,departure,destination,date,time,registration,color,meetupPoint,charges,idCard,carEngine}=user;
          const res = await fetch('/rideDetails',{
              method:"POST",
              headers: {
                  "Content-Type": "application/json"
              },
              body: JSON.stringify({
-                userName,departure,destination,date,time,number,registration,color,meetupPoint,charges
+                userName,departure,destination,date,time,registration,color,meetupPoint,charges,idCard,carEngine
 
              })
          });
@@ -100,7 +100,28 @@ const RideDetails=()=>{
     </div>
     <div className="card-body">
         <form method="POST">
-           
+        <div className="feilds">
+            <div className="input-group form-group">
+                <div className="input-group-prepend">
+                    <span className="input-group-text"><DriveEtaIcon/></span>
+                </div>
+                <input type="Number" name="idCard" id="idCard" className="form-control" placeholder ="Enter Your ID card Ex.35000-0000000-5"
+                value={user.idCard}
+                onChange={handleInputs}
+                ></input>
+            </div>
+            </div>
+            <div className="feilds">
+            <div className="input-group form-group">
+                <div className="input-group-prepend">
+                    <span className="input-group-text"><DriveEtaIcon/></span>
+                </div>
+                <input type="text" name="carEngine" id="carEngine" className="form-control"  placeholder="Enter your Car Engine No"
+                value={user.carEngine}
+                onChange={handleInputs}
+                ></input>
+            </div>
+            </div>
         
                <div className="feilds">
             <div className="input-group form-group">
@@ -161,7 +182,7 @@ const RideDetails=()=>{
                 ></input>
             </div>
             </div>
-            <div className="feilds">
+            {/* <div className="feilds">
             <div className="input-group form-group">
                 <div className="input-group-prepend">
                     <span className="input-group-text"><PhoneIcon /></span>
@@ -171,7 +192,7 @@ const RideDetails=()=>{
                 onChange={handleInputs} 
                 placeholder="Enter Phone Number"></input>
             </div>
-            </div>
+            </div> */}
             <div className="feilds">
             <div className="input-group form-group">
                 <div className="input-group-prepend">

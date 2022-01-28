@@ -71,13 +71,18 @@ const Ads = () => {
             })
         });
         console.log(response.status);
-        if (response.status === 200 || !response) {
+        if(response.status === 422 || !response)
+        {
+            window.alert("Please Filled the Feild")
+        }
+       else if (response.status === 200 || !response) {
             window.alert("Request Sent");
             setText(true);
         }
         else if (response.status === 208) {
             window.alert("Already Sent");
         }
+
     }
     useEffect(() => {
         getUser();
@@ -137,7 +142,8 @@ const Ads = () => {
                                                         </div>
                                                         <hr class="dashed"></hr>
                                                         <div className="origin">
-                                                            <div> <span><PhoneAndroidIcon /></span> <span className="origin1">{element.number}</span> </div>
+                                                            <div> <span><PhoneAndroidIcon /></span> <span className="origin1"><label for="number" title="Send Request For Number">03xxxxxxxxx</label></span> </div>
+                                                            
                                                             <div> <span><DriveEtaIcon /></span> <span className="destination1">{element.registration}</span> </div>
                                                         </div>
                                                     </div>

@@ -58,15 +58,15 @@ const Rating = (props) => {
 <div class="rating">
 <div class="rate" name="rating" id="rating" value={user.rating} onChange={handleInputs}>
     <input type="radio" id="star5" name="rating" value="5" />
-    <label for="star5" title="text">5 stars</label>
+    <label for="star5" title="5 Star">5 stars</label>
     <input type="radio" id="star4" name="rating" value="4" />
-    <label for="star4" title="text">4 stars</label>
+    <label for="star4" title="4 Star">4 stars</label>
     <input type="radio" id="star3" name="rating" value="3" />
-    <label for="star3" title="text">3 stars</label>
+    <label for="star3" title="3 Star">3 stars</label>
     <input type="radio" id="star2" name="rating" value="2" />
-    <label for="star2" title="text">2 stars</label>
+    <label for="star2" title="2 Star">2 stars</label>
     <input type="radio" id="star1" name="rating" value="1" />
-    <label for="star1" title="text">1 star</label>
+    <label for="star1" title="1 Star">1 star</label>
   </div>
   <div className="ratingButton">
   <button type="button" class="btn btn-outline-dark"   onClick={postRating}>Submit</button>

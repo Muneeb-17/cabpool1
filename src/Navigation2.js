@@ -10,7 +10,7 @@ class NavigationLogin extends React.Component{
         return(
            <> <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
            <Container>
-           <Navbar.Brand href="#home">Cab Pool</Navbar.Brand>
+           <Navbar.Brand href="/home">Cab Pool</Navbar.Brand>
            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
            <Navbar.Collapse id="responsive-navbar-nav">
              <Nav className="ms-auto">

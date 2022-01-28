@@ -66,11 +66,12 @@ const MyRequest = () => {
                 })
             )
         })
+        window.location.reload(false);
 
     }
     useEffect(() => {
         getUser();
-        deleteRide();
+       // deleteRide();
     }, []);
     return (
         <div className="header">

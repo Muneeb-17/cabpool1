@@ -132,9 +132,9 @@ router.post('/rideDetails',authenticate, async (req, res) => {
 
     console.log('-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=--==-=----------------- rideDetails post');
 
-    const { userName, departure, destination, date, time, number, registration, color, meetupPoint, charges } = req.body;
+    const { userName, departure, destination, date, time, number, registration, color, meetupPoint, charges,idCard,carEngine } = req.body;
 
-    if (!departure || !destination || !date || !time || !number || !registration || !color || !meetupPoint || !charges) {
+    if (!departure || !destination || !date || !time || !registration || !color || !meetupPoint || !charges || !idCard || !carEngine) {
       return res.status(422).json({ error: "plz filled the field" });
     }
     else {
@@ -142,11 +142,12 @@ router.post('/rideDetails',authenticate, async (req, res) => {
       const loginUserName = await req['rootUser'].name;
       const loginEmail = await req['rootUser'].email;
       const loginImage = await req['rootUser'].image;
+      const loginNumber = await req['rootUser'].number;
       const rating = await req['rootUser'].rating;
       console.log(loginUserName);
       console.log("=========================");
-      const userData = new Ride({ loginId: loginData, loginName: loginUserName, userName: loginEmail, image:loginImage, rating:rating,departure, destination, date, time, number, registration, color, meetupPoint, charges,payment:"0" });
-      const allAds = new Driver({ userName: loginUserName, departure, destination, date, time, number, registration, color, meetupPoint, charges });
+      const userData = new Ride({ loginId: loginData, loginName: loginUserName, userName: loginEmail, image:loginImage, rating:rating,departure, destination, date, time, number:loginNumber, registration, color, meetupPoint, charges,payment:"0",idCard,carEngine });
+      const allAds = new Driver({ userName: loginUserName, departure, destination, date, time, number, registration, color, meetupPoint, charges,idCard,carEngine });
       console.log("=====================12121====");
       await userData.save();
       await allAds.save();
@@ -265,6 +266,9 @@ router.put('/request/:id', authenticate, async (req, res) => {
   const image = await req['rootUser'].image;
   const userRating = await req['rootUser'].rating;
   const passenger = req.body.passenger;  
+  if (!passenger) {
+    return res.status(422).json({ error: "please filled the field" });
+  }
   const data = await Ride.find({loginId:rootId})
   console.log(data);
    if (data == false) {
@@ -311,11 +315,34 @@ router.get('/home', authenticate, async (req, res) => {
     res.send({ rootUser: req['rootUser']})
     
 });
+ 
+router.put('/changeData', authenticate, async(req,res)=>{
+
+  try {
+    console.log("===========Profile");
+     const rootUser1 = req['rootUser']._id;
+     const number = req.body.userNumber
+         
+          await User.findByIdAndUpdate(rootUser1, {
+             number:number
+          },
+            { new: true });
+          res.status(200).json({message: "Save Changes"});
+  }
+ catch (e) {
+  console.log('-=-=-=-=-=-=-=-=- Eror =-=-=--=-=-=-=-==--==-=-');
+  res.status(500).json(e);
+  console.log(e);
+
+}
+
+})
+
 
 router.put('/password', authenticate, async(req,res)=>{
 
   try {
-    console.log("===========profile");
+    console.log("===========Password");
      const rootUser1 = req['rootUser']._id;
      const userName = req.body.userName
      const password = req.body.password;
@@ -415,7 +442,7 @@ router.put('/rating/:id',authenticate, async(req,res)=>{
    const rating = req.body.rating;
    console.log(rating);
    const getRating = await User.findById(id);
-   const set = +getRating.rating + +rating*478/479;
+   const set = ((+getRating.rating *478) + +rating)/479;
    const setRating = parseFloat(set).toFixed(2);
 
     const updateResult = await User.findByIdAndUpdate(id, {

@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { NavLink, useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import './login.css';
 import Navigation2 from "./Navigation2"
 
@@ -22,14 +22,14 @@ const Profile = () => {
 
 
     const PostData = async () => {
-        const res = await fetch('/password', {
+        const res = await fetch('/changeData', {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"
             },
             credentials: "include",
             body: JSON.stringify({
-              userName,password,cpassword,oldPassword
+              userNumber
 
             })
         });
@@ -123,40 +123,26 @@ const Profile = () => {
                             </div>
                             <div class="row mt-3">
                                 <div class="col-md-12"><label class="labels">Name</label><input type="text" class="form-control" name="userName" id="userName" placeholder="first name" value={userName.name}
-                                    onChange={(e) =>
-                                        setUserName(e.target.value)} /></div>
+                                     /></div>
                             </div>
                             <div class="row mt-3">
                                 <div class="col-md-12"><label class="labels">Email-ID</label><input type="text" class="form-control" name="userEmail" id="userEmail" value={userEmail.email} /></div>
-                                <div class="col-md-12"><label class="labels">Phone Number</label><input type="text" class="form-control" name="userNumber" id="userNumber" placeholder="Enter Phone Number" value={userNumber.number} /></div>
+                                <div class="col-md-12"><label class="labels">Phone Number</label><input type="text" class="form-control" name="userNumber" id="userNumber" placeholder="Enter Phone Number" value={userNumber.number} 
+                                onChange={(e) =>
+                                    setUserNumber(e.target.value)}/></div>
                             </div>
-                            <div class="row mt-3">
-                                <h5>Change Password</h5>
-                                <div class="col-md-12">
-                                    <label class="labels">Enter Old Password</label>
-                                    <input type="password" class="form-control" name="oldpassword" id="oldpassword" placeholder="Enter old Password"
-                                        onChange={(e) =>
-                                            setOldPassword(e.target.value)} /></div>
-                                <div class="col-md-12">
-                                    <label class="labels">Enter New Password</label>
-                                    <input type="password" class="form-control" name="password" id="password" placeholder="Enter new Password"
-                                        onChange={(e) =>
-                                            setPassword(e.target.value)} /></div>
-                                <div class="col-md-12">
-                                    <label class="labels">Phone Passowrd Again</label>
-                                    <input type="password" class="form-control" name="cpassword" id="cpassword" placeholder="Enter New Password Again"
-                                        onChange={(e) =>
-                                            setCPassword(e.target.value)} /></div>
-                            </div>
-
-                            <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button"
-                                onClick={PostData}>Save Profile</button></div>
+                             <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button">Change Password</button></div>
+                             <div class="mt-5 text-center"><button class="btn btn-success profile-button" type="button"
+                                onClick={PostData}>Save Profile</button>&nbsp;
+                                <Link to='/home'><button class="btn btn-secondary profile-button" type="button">Go Back</button></Link></div>
                         </div>
-                    </div>
+                    </div>  
 
                 </div>
             </div>
             </form>
+           
+
         </>
     )
 }
