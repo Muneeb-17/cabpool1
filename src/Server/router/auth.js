@@ -262,6 +262,8 @@ router.put('/request/:id', authenticate, async (req, res) => {
   const rootId = await req['rootUser'].id;
   const userData = await req['rootUser'].name;
   const userDataa = await req['rootUser'].number;
+  const image = await req['rootUser'].image;
+  const userRating = await req['rootUser'].rating;
   const passenger = req.body.passenger;  
   const data = await Ride.find({loginId:rootId})
   console.log(data);
@@ -275,6 +277,8 @@ router.put('/request/:id', authenticate, async (req, res) => {
               name: userData,
               number: userDataa,
               passenger:passenger,
+              image:image,
+              rating:userRating
             }
           ]
         },
@@ -410,12 +414,17 @@ router.put('/rating/:id',authenticate, async(req,res)=>{
   try {
    const rating = req.body.rating;
    console.log(rating);
+   const getRating = await User.findById(id);
+   const set = +getRating.rating + +rating*478/479;
+   const setRating = parseFloat(set).toFixed(2);
+
     const updateResult = await User.findByIdAndUpdate(id, {
           
-      rating:rating*5/5
+      rating:setRating
     },
     {new:true}
     );
+
 
     res.status(200).json(updateResult);
   } catch (err) {

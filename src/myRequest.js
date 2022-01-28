@@ -3,6 +3,11 @@ import { useHistory, Link } from "react-router-dom";
 import { Navbar } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 import Navigation2 from "./Navigation2";
+import StarOutlineIcon from '@material-ui/icons/StarOutline';
+import TimerIcon from '@material-ui/icons/Timer';
+import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
+import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
+import PhoneIcon from '@material-ui/icons/Phone';
 import './search.css';
 import './popup.css';
 const moment = require('moment');
@@ -88,8 +93,8 @@ const MyRequest = () => {
                                         </div>
                                         <hr class="dashed"></hr>
                                         <div className="origin">
-                                            <div> <span>Date:</span> <span className="origin1">{element.date}</span> </div>
-                                            <div> <span>Time:</span> <span className="destination1">{element.time}</span> </div>
+                                            <div> <span><CalendarTodayIcon/></span> <span className="origin1"><b>{element.date}</b></span> </div>
+                                            <div> <span><TimerIcon/></span> <span className="destination1"><b>{element.time}</b></span> </div>
                                         </div>
                                     </div>
                                 </div>
@@ -100,10 +105,15 @@ const MyRequest = () => {
                                     <div className="card-login">
                                         <div className="d-flex align-items-center">
                                             <div className="ml-3 w-100">
+                                            <img className="adsImage" src={PF + c.image} onError={({ currentTarget }) => {
+                                            currentTarget.onerror = null; // prevents looping
+                                            currentTarget.src = "https://www.seekpng.com/png/detail/966-9665317_placeholder-image-person-jpg.png"
+                                        }} width="90" height="90" />
                                                 <div className="origin">
-                                                    <div> <span>Name:</span><span className="origin1">{c.name}</span> </div>
-                                                    <div> <span >Contact No:</span> <span className="destination1">{c.number}</span> </div>
-                                                    <div> <span >No of Passenger:</span> <span className="destination1">{c.passenger}</span> </div>
+                                                <h4 className="trainer-name-title">{c.name}&ensp;<StarOutlineIcon/>{c.rating}</h4>
+                                                    {/* <div> <span className="trainer-name-title">{c.name}</span> </div> */}
+                                                    <div> <span ><PhoneIcon/></span> <span className="destination1"><b>{c.number}</b></span> </div>
+                                                    <div> <span ><PersonOutlineIcon/></span> <span className="destination1">{c.passenger}</span> </div>
                                                     {text ?
                                                         <>
                                                             <a href="#popup1">End Trip</a>

@@ -101,6 +101,16 @@ const DetailsSchema = new mongoose.Schema({
                 type: Number,
                 require: true
             },
+            image: {
+                type:String
+            },
+
+            rating: {
+                type: Number,
+                require: true
+            },
+
+
         }
     ]
 
