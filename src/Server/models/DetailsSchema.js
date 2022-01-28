@@ -118,6 +118,10 @@ const DetailsSchema = new mongoose.Schema({
                 type: Number,
                 require: true
             },
+            accept:{
+                type:String,
+                default:""
+            },
 
 
         }

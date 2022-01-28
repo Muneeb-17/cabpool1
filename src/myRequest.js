@@ -117,7 +117,7 @@ const MyRequest = () => {
                                                     <div> <span ><PersonOutlineIcon/></span> <span className="destination1">{c.passenger}</span> </div>
                                                     {text ?
                                                         <>
-                                                            <a href="#popup1">End Trip</a>
+                                                            <a  className="button11" href="#popup1">End Trip</a>
                                                             <div id="popup1" class="overlay">
                                                                 <div class="popup">
                                                                     <h2>Payment</h2>

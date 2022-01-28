@@ -13,12 +13,13 @@ import AdsLogin from './AdsLogin';
 import Update from './update';
 import MyRequest from './myRequest';
 import SendRequest from './sendRequest';
-import ContactUs from './contactUs';
+import AboutUs from './aboutUs';
 import Profile from './profile';
 import HomeLogin from './homelogin';
 import Payment from './payment';
 import Rating from './rating';
 import ChangePassword from './changePassword';
+import ErrorPage from './Errorpage';
 
 
 function App() {
@@ -41,11 +42,12 @@ function App() {
           <Route path='/update/:id' exact component={Update} />
           <Route path='/request' exact component={MyRequest} />
           <Route path='/sendRequest' exact component={SendRequest} />
-          <Route path='/contactUs' exact component={ContactUs} />
+          <Route path='/aboutUs' exact component={AboutUs} />
           <Route path="/profile" exact component={Profile} />
           <Route path= "/payment" exact component={Payment}/>
           <Route path = '/rating/:id' exact component={Rating}/>
           <Route path= '/changePassword' exact component={ChangePassword}/>
+          <Route><ErrorPage/></Route>
 
 
 

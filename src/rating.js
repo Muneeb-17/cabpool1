@@ -8,6 +8,7 @@ import './rating.css';
 const Rating = (props) => {
      const history = useHistory();
      const id = props.match.params.id;
+     const [data, setData] = useState('');
      const [user, setUser] = useState({ rating: "" });
 
     let name, value;
@@ -17,6 +18,35 @@ const Rating = (props) => {
 
         setUser({ ...user, [name]: value })
     }
+     
+
+    const getData = async () => {
+
+      try {
+          const res = await fetch('/home', {
+              method: "GET",
+              headers: {
+                  Accept: "application/json",
+                  "Content-Type": "application/json"
+              },
+              credentials: "include",
+          });
+
+          console.log(' catching error ------ Body---------------------');
+          const data = await res.json();
+          setData(data)
+          console.log(res.status);
+      } catch (err) {
+          console.log(err);
+          console.log(' redirect --==-=-=-=-=-=-=-=-=-=-=--==-=-=');
+          history.push('/login');
+
+      }
+  }
+  useEffect(() => {
+      getData();
+  }, []);
+
 
 
      const postRating = async(e)=>{
@@ -35,14 +65,13 @@ const Rating = (props) => {
 
         if(res.status===422||!res)
         {
-           window.alert("please filled the required feild");
            console.log("Invalid Entry");   
         } 
         else
         {
            window.alert("Added");
            console.log("Registration successfull");
-          // history.push('/myRide');
+           history.push('/home');
         }
         
     }

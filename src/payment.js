@@ -8,6 +8,7 @@ import './popup.css';
 const Payment = () => {
     const history = useHistory();
     const [ads, getads] = useState([]);
+    const [data, setData] = useState('');
     const [user, setUser] = useState({ payment: "" });
 
     let name, value;
@@ -17,7 +18,33 @@ const Payment = () => {
 
         setUser({ ...user, [name]: value })
     }
+    const getData = async () => {
 
+        try {
+            const res = await fetch('/home', {
+                method: "GET",
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json"
+                },
+                credentials: "include",
+            });
+  
+            console.log(' catching error ------ Body---------------------');
+            const data = await res.json();
+            setData(data)
+            console.log(res.status);
+        } catch (err) {
+            console.log(err);
+            console.log(' redirect --==-=-=-=-=-=-=-=-=-=-=--==-=-=');
+            history.push('/login');
+  
+        }
+    }
+    useEffect(() => {
+        getData();
+    }, []);
+  
     const getPayment = async () => {
         try {
             const response = await fetch('/myRide', {

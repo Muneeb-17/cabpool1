@@ -77,7 +77,7 @@ const Ads = () => {
         }
        else if (response.status === 200 || !response) {
             window.alert("Request Sent");
-            setText(true);
+
         }
         else if (response.status === 208) {
             window.alert("Already Sent");

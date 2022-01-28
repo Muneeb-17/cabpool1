@@ -6,6 +6,9 @@ import Navigation2 from "./Navigation2"
 
 const ChangePassword = () => {
     const history = useHistory();
+    const [formError , setFormError] = useState({});
+    const [isSubmit , setIsSubmit] = useState(false);
+    
     const [password, setPassword] = useState('');
     const [cpassword, setCPassword] = useState('');
     const [oldPassword, setOldPassword] = useState('');
@@ -25,16 +28,45 @@ const ChangePassword = () => {
 
             })
         });
+        console.log('/////////////////////');
+			 setFormError(validate(password));
+			 setIsSubmit(true);
+
         res.json();
         if (res.status === 200) {
             window.alert("Save Changes");
             history.push('/profile');
         }
+        
         else if(res.status === 422) {
-            window.alert("Wrong Old Password");
+            window.alert("Password Not Matched");
+        }
+        else if(res.status === 400) {
+            window.alert("Please Filled the Feilds");
         }
 
     }
+
+    useEffect(() => {
+        console.log(formError);
+        if(Object.keys(formError).length === 0 && isSubmit){
+        }
+    },[formError]);
+      const validate = (values) => {
+          const errors = {};
+          const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+          if(!values.password)
+          {
+              errors.password = "Password is required";
+          } 
+          if(values.password !== values.cpassword)
+          {
+              errors.cpassword = "Password not Match";
+          }
+
+          return errors;
+      }
+
 
      const getData = async () => {
 
@@ -97,6 +129,7 @@ const ChangePassword = () => {
                                     <input type="password" class="form-control" name="cpassword" id="cpassword" placeholder="Enter New Password Again"
                                         onChange={(e) =>
                                             setCPassword(e.target.value)} /></div>
+                                            <div className="error">{formError.cpassword}</div>
                             </div>
                             <div class="mt-5 text-center"><button class="btn btn-success profile-button" type="button"
                                 onClick={PostData}>Save</button>&nbsp;

@@ -246,12 +246,37 @@ router.delete('/delete/:id', async (req, res) => {
 });
 
 router.put('/accept/:id', authenticate, async (req, res) => {
+  console.log("==========ACCEPT");
   const id = req.params.id;
   console.log(id);
   const accept = "Accepted"; 
   const requestFind = await Ride.findOne({"requests._id":id});
- // requestFind.requests.addToSet({accept:accept});
-    // requestFind.save();
+ try {
+
+  requestFind.requests.set({accept:accept})
+  //requestFind.save();
+//  const acept = await Ride.findByIdAndUpdate(id,{
+//      $push:{
+//        requests:[
+//          {
+//            accept:accept
+//          }
+//        ]
+//      },
+//   },
+//   function (err) {
+//     if (err) {
+//       console.log(err)
+//     }
+//     else {
+//       res.status(200).json({ message: "Request Send" });
+//       console.log("Updated User : ");
+//     }
+//   })
+}catch(err){
+  console.log(err);
+}
+  
    
 })
 
@@ -341,13 +366,24 @@ router.put('/changeData', authenticate, async(req,res)=>{
 
 router.put('/password', authenticate, async(req,res)=>{
 
-  try {
+  
     console.log("===========Password");
      const rootUser1 = req['rootUser']._id;
      const userName = req.body.userName
      const password = req.body.password;
      const cpassword = req.body.cpassword;
      const oldPassword = req.body.oldPassword;
+
+     if (!password || !cpassword ) {
+      return res.status(400).json({ error: "plz filled the field" });
+    }
+
+    try {
+
+       if (password != cpassword) {
+        return res.status(422).json({ error: "password are not matching" });
+      }
+      else{
          const newpass = await bcrypt.hash(password,12);
          const newCpass = await bcrypt.hash(cpassword,12);
          
@@ -369,6 +405,7 @@ router.put('/password', authenticate, async(req,res)=>{
          }
 
         }
+      }
   }
  catch (e) {
   console.log('-=-=-=-=-=-=-=-=- Eror =-=-=--=-=-=-=-==--==-=-');

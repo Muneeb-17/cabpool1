@@ -131,7 +131,7 @@ const Profile = () => {
                                 onChange={(e) =>
                                     setUserNumber(e.target.value)}/></div>
                             </div>
-                             <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button">Change Password</button></div>
+                             <div class="mt-5 text-center"><Link to ='/changePassword'><button class="btn btn-primary profile-button" type="button">Change Password</button></Link></div>
                              <div class="mt-5 text-center"><button class="btn btn-success profile-button" type="button"
                                 onClick={PostData}>Save Profile</button>&nbsp;
                                 <Link to='/home'><button class="btn btn-secondary profile-button" type="button">Go Back</button></Link></div>

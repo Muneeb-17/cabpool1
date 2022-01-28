@@ -304,6 +304,22 @@
       padding-top:10px;
     padding-bottom:10px;
   }
+
+ .button11:visited , .button11:link{
+
+  background-color: #cf0505;
+  color: white;
+  padding: 14px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 20px;
+  font-size: 1em;
+  margin-bottom: 10px;
+  width: 100%;
+
+ }
+  
   
   .button:hover{
    cursor:pointer;
