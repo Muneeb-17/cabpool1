@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Link, useHistory } from "react-router-dom";
-import { Navbar } from 'react-bootstrap';
+import {NavLink, Link, useHistory } from "react-router-dom";
+import { Navbar,NavDropdown,Nav,Container} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 import './login.css';
 import VpnKeyIcon from '@material-ui/icons/VpnKey';
@@ -9,7 +9,7 @@ import Navigation from "./navigation";
 //import { InsertChart } from "@material-ui/icons";
 
 
-const Login = () => {
+const AdminLogin = () => {
 	const history = useHistory();
 	const [user, setUser] = useState({
 		email: "", password: ""
@@ -27,7 +27,7 @@ const Login = () => {
 	const loginUser = async (e) => {
 		const { email, password } = user;
 		e.preventDefault();
-		const res = await fetch('/login', {
+		const res = await fetch('/adminLogin', {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json"
@@ -52,7 +52,7 @@ const Login = () => {
 		}
 		else {
 			window.alert("login SuccessFully");
-			history.push('/home');
+			history.push('/adminData');
 		}
 	}
 	useEffect(() => {
@@ -77,13 +77,22 @@ const Login = () => {
 
 	return (
 		<div className="header">
-			<Navigation />
-			<div className="bg_image">
+			<div className="header">
+        <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+  <Container>
+  <Navbar.Brand href="#home">Cab Pool</Navbar.Brand>
+  <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+  <Navbar.Collapse id="responsive-navbar-nav">
+  </Navbar.Collapse>
+  </Container>
+</Navbar>
+</div>
+			<div className="bg_image11">
 				<div className="d-flex justify-content-center h-100">
 
 					<div className="card">
 						<div className="card-header">
-							<h3>Login</h3>
+							<h3>Admin Login</h3>
 
 						</div>
 						<div className="card-body">
@@ -125,10 +134,6 @@ const Login = () => {
 						</div>
 						<div className="card-footer">
 							<div className="d-flex justify-content-center links">
-								Don't have an account?<Link to="/SignUp">Sign Up</Link>
-							</div>
-							<div className="d-flex justify-content-center links">
-								Login as a Admin<Link to="/adminLogin">Sign in</Link>
 							</div>
 						</div>
 					</div>
@@ -141,4 +146,4 @@ const Login = () => {
 }
 
 
-export default Login;
+export default AdminLogin;

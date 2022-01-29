@@ -4,6 +4,7 @@ import { Navbar,NavDropdown,Nav,Container} from 'react-bootstrap';
 import './login.css';
 import Navigation from "./navigation";
 import HomeDesign from './homeDesign.js';
+import Home from './homeAfterLogin';
 
 const HomePage = () => {
     const history = useHistory();
@@ -90,7 +91,7 @@ callHome();
   </Container>
 </Navbar>
 </div>
-<HomeDesign/>
+<Home/>
 </>
 
        :<> <Navigation/>

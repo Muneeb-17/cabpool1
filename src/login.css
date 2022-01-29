@@ -91,6 +91,13 @@ background-color: white;
     background-size: cover;
     
 }
+
+.bg_image11{
+    background-image: url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8YWRtaW58ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60');
+    background-size: cover;
+    height: 100vh;
+    color: #f5f5f5;
+  }
  
 .navbar-nav{
     margin-left: auto;

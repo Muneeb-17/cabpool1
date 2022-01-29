@@ -61,14 +61,14 @@ const RideDetails=()=>{
     });
      const PostData = async (e)=>{
          e.preventDefault();
-         const {userName,departure,destination,date,time,registration,color,meetupPoint,charges,idCard,carEngine}=user;
+         const {idCard,carEngine,userName,departure,destination,date,time,registration,number,color,meetupPoint,charges}=user;
          const res = await fetch('/rideDetails',{
              method:"POST",
              headers: {
                  "Content-Type": "application/json"
              },
              body: JSON.stringify({
-                userName,departure,destination,date,time,registration,color,meetupPoint,charges,idCard,carEngine
+                idCard,carEngine,userName,departure,destination,number,date,time,registration,color,meetupPoint,charges
 
              })
          });
@@ -105,7 +105,7 @@ const RideDetails=()=>{
                 <div className="input-group-prepend">
                     <span className="input-group-text"><DriveEtaIcon/></span>
                 </div>
-                <input type="Number" name="idCard" id="idCard" className="form-control" placeholder ="Enter Your ID card Ex.35000-0000000-5"
+                <input type="Number" name="idCard" id="idCard" className="form-control" placeholder ="Enter Your ID card Ex.3500000000005"
                 value={user.idCard}
                 onChange={handleInputs}
                 ></input>

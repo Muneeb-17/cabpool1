@@ -10,11 +10,13 @@ require('../app.js');
 const User = require('../models/userSchema');
 const Driver = require('../models/userSchemaRide');
 const Ride = require('../models/DetailsSchema')
+const Admin = require('../models/admin');
 const bcrypt = require('bcryptjs');
 const dotenv = require('dotenv');
 dotenv.config({ path: '../config.env' });
 app.use(cookieParser());
 const authenticate = require('../middleware/authenticate');
+const authAdmin = require('../middleware/authenticateAdmin');
 app.use(express.urlencoded({ extended: true }));
 const moment = require('moment');
 var ObjectId = require('mongodb').ObjectId; 
@@ -132,7 +134,7 @@ router.post('/rideDetails',authenticate, async (req, res) => {
 
     console.log('-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=--==-=----------------- rideDetails post');
 
-    const { userName, departure, destination, date, time, number, registration, color, meetupPoint, charges,idCard,carEngine } = req.body;
+    const {idCard,carEngine, userName, departure, destination, date, time, number, registration, color, meetupPoint, charges } = req.body;
 
     if (!departure || !destination || !date || !time || !registration || !color || !meetupPoint || !charges || !idCard || !carEngine) {
       return res.status(422).json({ error: "plz filled the field" });
@@ -146,7 +148,7 @@ router.post('/rideDetails',authenticate, async (req, res) => {
       const rating = await req['rootUser'].rating;
       console.log(loginUserName);
       console.log("=========================");
-      const userData = new Ride({ loginId: loginData, loginName: loginUserName, userName: loginEmail, image:loginImage, rating:rating,departure, destination, date, time, number:loginNumber, registration, color, meetupPoint, charges,payment:"0",idCard,carEngine });
+      const userData = new Ride({idCard,carEngine, loginId: loginData, loginName: loginUserName, userName: loginEmail, image:loginImage, rating:rating,departure, destination, date, time, number:loginNumber, registration, color, meetupPoint, charges,payment:"0" });
       const allAds = new Driver({ userName: loginUserName, departure, destination, date, time, number, registration, color, meetupPoint, charges,idCard,carEngine });
       console.log("=====================12121====");
       await userData.save();
@@ -162,7 +164,7 @@ router.post('/rideDetails',authenticate, async (req, res) => {
 });
 
 
-router.get('/rideDetails', authenticate, async (req, res) => {
+router.get('/rideDetails', async (req, res) => {
   console.log('-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=--==-=----------------- rideDetails');
   try {
    
@@ -244,6 +246,8 @@ router.delete('/delete/:id', async (req, res) => {
   })
   
 });
+
+
 
 router.put('/accept/:id', authenticate, async (req, res) => {
   console.log("==========ACCEPT");
@@ -419,7 +423,7 @@ router.put('/password', authenticate, async(req,res)=>{
 router.get('/logout', (req, res) => {
   console.log('-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=--==-=----------------- logout');
   res.clearCookie("jwt");
-  res.redirect("/home");
+  res.redirect("/login");
 });
 
 
@@ -495,8 +499,101 @@ router.put('/rating/:id',authenticate, async(req,res)=>{
     res.status(500).json(err);
   }
 })
+//Admin Routes
+
+router.post('/adminLogin', async (req, res) => {
+  console.log('-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=--==-=----------------- login');
+  try {
+    let token;
+    const { email, password } = req.body;
+    console.log(req.body);
+
+    if (!email || !password) {
+      return res.status(422).json({ error: "please filled the field" });
+    }
+    const userLogin = await Admin.findOne({ email: email });
+    if (userLogin) {
+
+      const isMatch = await bcrypt.compare(password, userLogin.password);
+      token = await userLogin.generateAuthToken();
+      // console.log("the token part " + token);
+
+      res.cookie('jwt', token, {
+        expires: new Date(Date.now() + 360000),
+        httpOnly: true
+      });
+
+      if (!isMatch) {
+        res.status(400).json({ error: "Invalid Credientials " });
+      } else {
+        res.json({ message: "User Login Successfully" });
+      }
+    }
+    else {
+      res.status(400).json({ error: "Invalid Credientials " });
+    }
+  }
+  catch (err) {
+    console.log(err);
+  }
+});
 
 
+
+router.get('/adminData' ,authAdmin,async(req,res)=> {
+try{
+  const adminData = await User.find();
+  res.send(adminData);
+}catch(err)
+{
+  console.log(err);
+}
+})
+
+
+
+router.delete('/adminDelete/:id',authAdmin, async (req, res) => {
+  const id = req.params.id
+  console.log(id);
+  console.log("============delete");
+  await User.findByIdAndDelete(id).then(user => {
+    if (user) {
+      return res.status(200).json({ success: true, message: 'the User is deleted' })
+    } else {
+      return res.status(404).json({ success: true, message: 'User not found' })
+    }
+  }).catch(err => {
+    return res.status(500).json({ success: false, error: err })
+  })
+  
+});
+
+router.get('/getAdminData/:id', authAdmin, async (req, res) => {
+  console.log('-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=--==-=----------------- getData');
+  const id = req.params.id;
+  const driverData = await User.findById(id);
+  res.send(driverData);
+});
+
+
+router.put('/adminUpdate/:id', authAdmin, async (req, res) => {
+  console.log("=================update");
+  const id = req.params.id;
+  console.log(id);
+  try {
+    const result = await User.findById(id);
+    console.log(result);
+    const updateResult = await User.findByIdAndUpdate(id, {
+      $set: req.body,
+    },
+      { new: true }
+    );
+
+    res.status(200).json(updateResult);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 
 module.exports = router;

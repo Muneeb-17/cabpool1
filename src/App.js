@@ -20,6 +20,10 @@ import Payment from './payment';
 import Rating from './rating';
 import ChangePassword from './changePassword';
 import ErrorPage from './Errorpage';
+import AdminLogin from './adminLogin';
+import AdminData from './adminData';
+import AdminUpdate from './adminUpdate';
+import AdminUserData from './adminUserAds';
 
 
 function App() {
@@ -47,6 +51,10 @@ function App() {
           <Route path= "/payment" exact component={Payment}/>
           <Route path = '/rating/:id' exact component={Rating}/>
           <Route path= '/changePassword' exact component={ChangePassword}/>
+          <Route path= '/adminlogin' exact component={AdminLogin}/>
+          <Route path= '/adminData' exact component={AdminData}/>
+          <Route path='/adminUpdate/:id' exact component={AdminUpdate} />
+          <Route path='/adminAds' exact component={AdminUserData} />
           <Route><ErrorPage/></Route>
 
 

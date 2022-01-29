@@ -16,7 +16,7 @@ const Logout = () => {
              const data = await res.body;
              if(res.status!== 200)
              {
-                history.push('/home');
+                history.push('/');
              }
             
              

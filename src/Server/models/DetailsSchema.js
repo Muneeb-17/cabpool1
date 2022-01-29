@@ -38,7 +38,7 @@ const DetailsSchema = new mongoose.Schema({
     },
 
     idCard: {
-        type: Number,
+        type: String,
         require: true
     },
     carEngine:{

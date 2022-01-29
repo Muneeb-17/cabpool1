@@ -1,0 +1,28 @@
+  #form {
+    max-width: 700px;
+    padding: 2rem;
+    box-sizing: border-box;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .form-field {
+    display: flex;
+    margin: 0 0 1rem 0;
+  }
+  .adminLabel, input {
+    width: 70%;
+    padding: 0.5rem;
+    box-sizing: border-box;
+    justify-content: space-between;
+    font-size: 1.1rem;
+  }
+  .adminLabel {
+    text-align: right;
+    width: 30%;
+  }
+  input {
+    border: 2px solid #aaa;
+    border-radius: 2px;
+  }
+  
