@@ -96,7 +96,7 @@ class HomeAfterLogin extends React.Component {
             <div className="row">
               <div className="col-sm-12 col-md-6">
                 <h6>About</h6>
-                <p className="text-justify">Scanfcode.com <i>CODE WANTS TO BE SIMPLE </i> is an initiative  to help the upcoming programmers with the code. Scanfcode focuses on providing the most efficient code or snippets as the code wants to be simple. We will help programmers build up concepts in different programming languages that include C, C++, Java, HTML, CSS, Bootstrap, JavaScript, PHP, Android, SQL and Algorithm.</p>
+                <p className="text-justify">People in today's environment are continually gravitating toward technology. Everything becomes stronger by the day. The Cab Pool is a ride-sharing business that allows customers to share a car with a few clicks on the Web App or a Smart Phone App. The consumer searches for the city to which he or she want to travel. Those who are going alone can update the site's advertisement with all of the necessary details.</p>
               </div>
               <div className="col-xs-6 col-md-3">
                 <h6>Quick Links</h6>
@@ -118,10 +118,11 @@ class HomeAfterLogin extends React.Component {
 
               <div class="col-md-4 col-sm-6 col-xs-12">
                 <ul class="social-icons">
-                  <Link to=""><FacebookIcon /></Link>
-                  <Link to=""><TwitterIcon /></Link>
-                  <Link to=""><InstagramIcon /></Link>
-                  <Link to=""><LinkedInIcon /></Link>
+                <a onClick={()=> window.open("https://www.facebook.com/")}><FacebookIcon/></a>
+                  <a onClick={()=> window.open("https://twitter.com/?lang=en")}><TwitterIcon /></a>
+                  <a onClick={()=> window.open("https://www.instagram.com/?hl=en")}><InstagramIcon /></a>
+                  <a onClick={()=> window.open("https://www.linkedin.com/login")}><LinkedInIcon /></a>
+               
                 </ul>
               </div>
             </div>
