@@ -8,7 +8,7 @@ import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
 import StarOutlineIcon from '@material-ui/icons/StarOutline';
 import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
 import PhoneIcon from '@material-ui/icons/Phone';
-
+import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
 import './search.css';
 const moment = require('moment');
 
@@ -119,6 +119,7 @@ const SendRequest = () => {
                                                     {/* <div> <span className="trainer-name-title">{c.name}</span> </div> */}
                                                     <div> <span ><PhoneIcon/></span> <span className="destination1"><b>{c.number}</b></span> </div>
                                                     <div> <span ><PersonOutlineIcon/></span> <span className="destination1">{c.passenger}</span> </div>
+                                                    <div> <span ><AssignmentIndIcon/></span> <span className="destination1">{c.accept}</span> </div>
                                                     <button className="button1" onClick={() => {
                                                            deleteRide(c._id);
                                                        }}>Cancel</button>

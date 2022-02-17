@@ -102,10 +102,6 @@ const DetailsSchema = new mongoose.Schema({
                 type: Number,
                 require: true
             },
-            accept:{
-                type:String,
-                require: true
-            },
             passenger: {
                 type: Number,
                 require: true

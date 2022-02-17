@@ -2,6 +2,7 @@ import React,{ useEffect, useState } from "react";
 import {NavLink, useHistory } from "react-router-dom";
 import { Navbar,NavDropdown,Nav,Container} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
+import './about.css';
 
 
 const AboutUs = () => {
@@ -9,35 +10,63 @@ const AboutUs = () => {
     return (
         <>
      
-<body>
-  <div class="container">
-            <div class="circles"></div>
-            <div class="details-container">
-                <div class="avatar">
-                    <img src="https://image.shutterstock.com/image-vector/carsharing-carpooling-infographics-flowchart-planning-600w-512128840.jpg" class="img-fluid" alt=""/>
-                </div>
-                <div class="about">
-                    <div class="name">
-                        <p>
-                            Hello There!
-                        </p>
-                        <h1>
-                            Welcome to CabPool
-                        </h1>
-                    </div>
-                    <div class="about-content">
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt architecto ut accusamus maxime laborum vel et consectetur, eveniet nobis, iure aperiam. Fuga illo impedit hic possimus tempora asperiores. Dicta, esse!
-                        </p>
-               
-                    </div>
-                </div>
-                <div class="clear"></div>
-            </div>
-                    </div> 
-  
-</body>
-        </>
+     <div class="aboutus-section">
+                  <div class="container">
+                      <div class="row">
+                          <div class="col-md-3 col-sm-6 col-xs-12">
+                              <div class="aboutus">
+                                  <h2 class="aboutus-title">About Us</h2>
+                                  <p class="aboutus-text">Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in.</p>
+                                  <p class="aboutus-text">This is Photoshop's version of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem</p>
+                                  <a class="aboutus-more" href="#">read more</a>
+                              </div>
+                          </div>
+                          <div class="col-md-3 col-sm-6 col-xs-12">
+                              <div class="aboutus-banner">
+                                  <img src="http://themeinnovation.com/demo2/html/build-up/img/home1/about1.jpg" alt="">
+                                  </img>
+                              </div>
+                          </div>
+                          <div class="col-md-5 col-sm-6 col-xs-12">
+                              <div class="feature">
+                                  <div class="feature-box">
+                                      <div class="clearfix">
+                                          <div class="iconset">
+                                              <span class="glyphicon glyphicon-cog icon"></span>
+                                          </div>
+                                          <div class="feature-content">
+                                              <h4>Work with heart</h4>
+                                              <p>Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in.</p>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="feature-box">
+                                      <div class="clearfix">
+                                          <div class="iconset">
+                                              <span class="glyphicon glyphicon-cog icon"></span>
+                                          </div>
+                                          <div class="feature-content">
+                                              <h4>Reliable services</h4>
+                                              <p>Donec vitae sapien ut libero venenatis faucibu. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt</p>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="feature-box">
+                                      <div class="clearfix">
+                                          <div class="iconset">
+                                              <span class="glyphicon glyphicon-cog icon"></span>
+                                          </div>
+                                          <div class="feature-content">
+                                              <h4>Great support</h4>
+                                              <p>Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in.</p>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>        </>
 
     )
 }

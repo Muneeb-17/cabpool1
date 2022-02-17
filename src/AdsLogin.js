@@ -44,7 +44,7 @@ const AdsLogin = () =>{
             }catch(err) 
             {
                 console.log(err);
-               // history.push('/login');
+                history.push('/login');
             }
     }
     useEffect(() =>{
@@ -106,7 +106,7 @@ const AdsLogin = () =>{
                     <div> <span><CalendarTodayIcon/></span> <span className="origin1">{element.date}</span> </div>
                     <div> <span><TimerIcon/></span> <span className="destination1">{element.time}</span> </div>
                 </div>
-                <div className="button:hover"><Link to ='./ads'><button className="button12">Request</button> </Link></div>
+                <div className="button:hover"><Link to ='./login'><button className="button12">Request</button> </Link></div>
           </div>
         </div>
         </div>

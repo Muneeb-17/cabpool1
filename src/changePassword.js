@@ -44,6 +44,10 @@ const ChangePassword = () => {
         else if(res.status === 400) {
             window.alert("Please Filled the Feilds");
         }
+        
+        else if(res.status === 201) {
+            window.alert("Wrong Old Password");
+        }
 
     }
 

@@ -127,7 +127,7 @@ const SignUp = () => {
 						<div className="input-group-prepend">
 							<span className="input-group-text"><PersonIcon /></span>
 						</div>
-						<input type="email" name="email" id="email" className="form-control"
+						<input type="email" name="email" id="email" className="form-control" pattern="/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/" required
 						value={user.email}
 						onChange={handleInputs}
 						 placeholder="Email"></input>
@@ -163,7 +163,7 @@ const SignUp = () => {
 						<div className="input-group-prepend">
 							<span className="input-group-text"><PhoneIcon /></span>
 						</div>
-						<input type="text" name="number" id="number"  className="form-control"
+						<input type="number" name="number" id="number"  className="form-control"
 						value={user.number}
 						onChange={handleInputs} 
 						placeholder="Enter Phone Number"></input>

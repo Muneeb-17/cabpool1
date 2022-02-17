@@ -19,7 +19,7 @@ const authenticate = require('../middleware/authenticate');
 const authAdmin = require('../middleware/authenticateAdmin');
 app.use(express.urlencoded({ extended: true }));
 const moment = require('moment');
-var ObjectId = require('mongodb').ObjectId; 
+var ObjectId = require('mongodb').ObjectId;
 const multer = require('multer');
 const path = require('path');
 var http = require('http');
@@ -35,7 +35,7 @@ const storage = multer.diskStorage({
     cb(null, "./images");
   },
   filename: (req, file, cb) => {
-    cb(null, file.fieldname+"_"+Date.now()+path.extname(file.originalname));
+    cb(null, file.fieldname + "_" + Date.now() + path.extname(file.originalname));
   },
 });
 
@@ -44,16 +44,16 @@ const upload = multer({ storage: storage })
 //app.use('/images', express.static(path.join(__dirname,'../images')));
 
 
-router.put('/profile' ,upload.single('photo'), authenticate, async(req,res)=>{
- const success = req.file.filename+"uploaded successfully";
-try{
- const loginData = await req['rootUser'].id;
- const upload = await User.findByIdAndUpdate(loginData,{
-   image:req.file.filename,
- })
-}catch(e){
-  console.log(e);
-}
+router.put('/profile', upload.single('photo'), authenticate, async (req, res) => {
+  const success = req.file.filename + "uploaded successfully";
+  try {
+    const loginData = await req['rootUser'].id;
+    const upload = await User.findByIdAndUpdate(loginData, {
+      image: req.file.filename,
+    })
+  } catch (e) {
+    console.log(e);
+  }
 
 });
 //making images folder public
@@ -73,7 +73,7 @@ router.post('/register', async (req, res) => {
       return res.status(422).json({ error: "password are not matching" });
     }
     else {
-      const user = new User({ name, email, password, cpassword, number });
+      const user = new User({ name, email, password, cpassword, number,rating:"0" });
 
 
       await user.save();
@@ -83,8 +83,8 @@ router.post('/register', async (req, res) => {
 
   } catch (err) {
     console.log(err);
+    res.send(400).json({ error: "InValid Email" })
   }
-  //res.json({message: req.body}); 
 });
 
 //login 
@@ -129,14 +129,25 @@ router.post('/login', async (req, res) => {
 
 
 
-router.post('/rideDetails',authenticate, async (req, res) => {
+router.post('/rideDetails', authenticate, async (req, res) => {
   try {
 
     console.log('-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=--==-=----------------- rideDetails post');
 
-    const {idCard,carEngine, userName, departure, destination, date, time, number, registration, color, meetupPoint, charges } = req.body;
+    const { idCard,
+      carEngine,
+      userName,
+      departure,
+      destination,
+      date,
+      time,
+      number,
+      registration,
+      color,
+      meetupPoint,
+      charges } = req.body;
 
-    if (!departure || !destination || !date || !time || !registration || !color || !meetupPoint || !charges || !idCard || !carEngine) {
+    if (!departure || !destination || !date || !time || !registration || !color || !meetupPoint || !charges || !carEngine) {
       return res.status(422).json({ error: "plz filled the field" });
     }
     else {
@@ -148,8 +159,37 @@ router.post('/rideDetails',authenticate, async (req, res) => {
       const rating = await req['rootUser'].rating;
       console.log(loginUserName);
       console.log("=========================");
-      const userData = new Ride({idCard,carEngine, loginId: loginData, loginName: loginUserName, userName: loginEmail, image:loginImage, rating:rating,departure, destination, date, time, number:loginNumber, registration, color, meetupPoint, charges,payment:"0" });
-      const allAds = new Driver({ userName: loginUserName, departure, destination, date, time, number, registration, color, meetupPoint, charges,idCard,carEngine });
+      const userData = new Ride({
+        idCard, carEngine,
+        loginId: loginData,
+        loginName: loginUserName,
+        userName: loginEmail,
+        image: loginImage,
+        rating: rating,
+        departure,
+        destination,
+        date,
+        time,
+        number: loginNumber,
+        registration,
+        color,
+        meetupPoint,
+        charges, payment: "0"
+      });
+      const allAds = new Driver({
+        userName: loginUserName,
+        departure,
+        destination,
+        date,
+        time,
+        number,
+        registration,
+        color,
+        meetupPoint,
+        charges,
+        idCard,
+        carEngine
+      });
       console.log("=====================12121====");
       await userData.save();
       await allAds.save();
@@ -164,13 +204,13 @@ router.post('/rideDetails',authenticate, async (req, res) => {
 });
 
 
-router.get('/rideDetails', async (req, res) => {
+router.get('/rideDetails', authenticate, async (req, res) => {
   console.log('-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=--==-=----------------- rideDetails');
   try {
-   
+
     const driverData = await Ride.find();
     res.send(driverData);
-  
+
   } catch (e) {
     res.send(e);
   }
@@ -217,18 +257,17 @@ router.delete('/cancel/:id', async (req, res) => {
   const id = req.params.id
   console.log(id);
   console.log("============Cancel");
-  try{
-    const todo = await Ride.findOne({"requests._id":id})
+  try {
+    const todo = await Ride.findOne({ "requests._id": id })
     console.log(todo);
     console.log(todo.requests);
     todo.requests.pull({ _id: id })
     todo.save();
-    }catch(err)
-    {
-      console.log("======Errrr======Cancel");
-      console.log(err);
-    }
-  
+  } catch (err) {
+    console.log("======Errrr======Cancel");
+    console.log(err);
+  }
+
 });
 
 router.delete('/delete/:id', async (req, res) => {
@@ -244,7 +283,7 @@ router.delete('/delete/:id', async (req, res) => {
   }).catch(err => {
     return res.status(500).json({ success: false, error: err })
   })
-  
+
 });
 
 
@@ -253,35 +292,25 @@ router.put('/accept/:id', authenticate, async (req, res) => {
   console.log("==========ACCEPT");
   const id = req.params.id;
   console.log(id);
-  const accept = "Accepted"; 
-  const requestFind = await Ride.findOne({"requests._id":id});
- try {
+  const accept = "Accepted";
+  const requestFind = await Ride.findOne({ "requests._id": id });
+  try {
+    await Ride.findOneAndUpdate({ "requestFind_id": id }, {
+      $set: {
+        requests: [
+          {
+            accept: "Accept"
+          }
+        ]
 
-  requestFind.requests.set({accept:accept})
-  //requestFind.save();
-//  const acept = await Ride.findByIdAndUpdate(id,{
-//      $push:{
-//        requests:[
-//          {
-//            accept:accept
-//          }
-//        ]
-//      },
-//   },
-//   function (err) {
-//     if (err) {
-//       console.log(err)
-//     }
-//     else {
-//       res.status(200).json({ message: "Request Send" });
-//       console.log("Updated User : ");
-//     }
-//   })
-}catch(err){
-  console.log(err);
-}
-  
-   
+      }
+    })
+    console.log();
+  } catch (err) {
+    console.log(err);
+  }
+
+
 })
 
 
@@ -294,129 +323,134 @@ router.put('/request/:id', authenticate, async (req, res) => {
   const userDataa = await req['rootUser'].number;
   const image = await req['rootUser'].image;
   const userRating = await req['rootUser'].rating;
-  const passenger = req.body.passenger;  
+  const passenger = req.body.passenger;
   if (!passenger) {
     return res.status(422).json({ error: "please filled the field" });
   }
-  const data = await Ride.find({loginId:rootId})
+  const data = await Ride.find({ loginId: rootId })
+  const data2 = await Ride.find({ "requests.ID": rootId })
   console.log(data);
-   if (data == false) {
-    await Ride.findByIdAndUpdate(id,
-      {
-        $addToSet: {
-          requests: [
-            {
-              ID:rootId,
-              name: userData,
-              number: userDataa,
-              passenger:passenger,
-              image:image,
-              rating:userRating
-            }
-          ]
+  if (data == false) {
+    if (data2 == false) {
+      await Ride.findByIdAndUpdate(id,
+        {
+          $addToSet: {
+            requests: [
+              {
+                ID: rootId,
+                name: userData,
+                number: userDataa,
+                passenger: passenger,
+                image: image,
+                rating: userRating,
+                accept: "Accept"
+              }
+            ]
+          },
         },
-      },
-    
-      function (err) {
-        if (err) {
-          console.log(err)
-        }
-        else {
-          res.status(200).json({ message: "Request Send" });
-          console.log("Updated User : ");
-        }
-      })
-  
+
+        function (err) {
+          if (err) {
+            console.log(err)
+          }
+          else {
+            res.status(200).json({ message: "Request Send" });
+            console.log("Updated User : ");
+          }
+        })
+    }
+    else {
+      res.status(400).json({ error: "Request Not Sent:Authorization" });
+    }
+
   }
   else {
-     res.status(500).json({ error: "Request Not Sent:Authorization" });
+    res.status(500).json({ error: "Request Not Sent:Authorization" });
   }
 })
 
 
 //home
 router.get('/home', authenticate, async (req, res) => {
-  
-    console.log('-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=--==-=----------------- hello');
-    let now = new Date();
-    var dateString = moment().subtract(1, 'days').format('YYYY-MM-DD');
-    await Ride.deleteMany({ date: dateString });
-    res.send({ rootUser: req['rootUser']})
-    
+
+  console.log('-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=--==-=----------------- hello');
+  let now = new Date();
+  var dateString = moment().subtract(1, 'days').format('YYYY-MM-DD');
+  await Ride.deleteMany({ date: dateString });
+  res.send({ rootUser: req['rootUser'] })
+
 });
- 
-router.put('/changeData', authenticate, async(req,res)=>{
+
+router.put('/changeData', authenticate, async (req, res) => {
 
   try {
     console.log("===========Profile");
-     const rootUser1 = req['rootUser']._id;
-     const number = req.body.userNumber
-         
-          await User.findByIdAndUpdate(rootUser1, {
-             number:number
-          },
-            { new: true });
-          res.status(200).json({message: "Save Changes"});
-  }
- catch (e) {
-  console.log('-=-=-=-=-=-=-=-=- Eror =-=-=--=-=-=-=-==--==-=-');
-  res.status(500).json(e);
-  console.log(e);
+    const rootUser1 = req['rootUser']._id;
+    const number = req.body.userNumber
 
-}
+    await User.findByIdAndUpdate(rootUser1, {
+      number: number
+    },
+      { new: true }); ch
+    res.status(200).json({ message: "Save Changes" });
+  }
+  catch (e) {
+    console.log('-=-=-=-=-=-=-=-=- Eror =-=-=--=-=-=-=-==--==-=-');
+    res.status(500).json(e);
+    console.log(e);
+
+  }
 
 })
 
 
-router.put('/password', authenticate, async(req,res)=>{
+router.put('/password', authenticate, async (req, res) => {
 
-  
-    console.log("===========Password");
-     const rootUser1 = req['rootUser']._id;
-     const userName = req.body.userName
-     const password = req.body.password;
-     const cpassword = req.body.cpassword;
-     const oldPassword = req.body.oldPassword;
 
-     if (!password || !cpassword ) {
-      return res.status(400).json({ error: "plz filled the field" });
+  console.log("===========Password");
+  const rootUser1 = req['rootUser']._id;
+  const userName = req.body.userName
+  const password = req.body.password;
+  const cpassword = req.body.cpassword;
+  const oldPassword = req.body.oldPassword;
+
+  if (!password || !cpassword) {
+    return res.status(400).json({ error: "plz filled the field" });
+  }
+
+  try {
+
+    if (password != cpassword) {
+      return res.status(422).json({ error: "password are not matching" });
     }
+    else {
+      const newpass = await bcrypt.hash(password, 12);
+      const newCpass = await bcrypt.hash(cpassword, 12);
 
-    try {
-
-       if (password != cpassword) {
-        return res.status(422).json({ error: "password are not matching" });
-      }
-      else{
-         const newpass = await bcrypt.hash(password,12);
-         const newCpass = await bcrypt.hash(cpassword,12);
-         
-         const match = await User.findById(rootUser1)
-         if(match)
-        {
-         const isMatch =  await bcrypt.compare(oldPassword , match.password)
-         if(isMatch)
-         {
+      const match = await User.findById(rootUser1)
+      if (match) {
+        const isMatch = await bcrypt.compare(oldPassword, match.password)
+        if (isMatch) {
           const find = await User.findByIdAndUpdate(rootUser1, {
-              password:newpass,
-              cpassword:newCpass,
+            password: newpass,
+            cpassword: newCpass,
           },
             { new: true });
-          res.status(200).json({message: "Save Changes"});
-         }
-         else {
-           return  res.status(201).json({ error: "Wrong Password" });
-         }
-
+          res.status(200).json({ message: "Save Changes" });
         }
-      }
-  }
- catch (e) {
-  console.log('-=-=-=-=-=-=-=-=- Eror =-=-=--=-=-=-=-==--==-=-');
-  res.status(500).json(e);
-  console.log(e);
+        else {
+          return res.status(201).json({ error: "Wrong Password" });
+        }
 
-}
+      }
+    }
+  }
+  catch (e) {
+    console.log('-=-=-=-=-=-=-=-=- Eror =-=-=--=-=-=-=-==--==-=-');
+    res.status(500).json(e);
+    console.log(e);
+
+  }
 
 })
 
@@ -443,54 +477,60 @@ router.get('/getData/:id', async (req, res) => {
   res.send(driverData);
 });
 
-router.get('/getRequest',authenticate, async (req,res) => {
+router.get('/getRequest', authenticate, async (req, res) => {
   console.log("-------------GetRequest");
-  const request =  await req['rootUser'].name;
- const find = await Ride.find({"requests.name":request});
- res.send(find);
-  
+  const request = await req['rootUser'].name;
+  const find = await Ride.find({ "requests.name": request });
+  res.send(find);
+
 })
 
 
-router.put('/payment/:id', authenticate, async(req,res) => {
+router.put('/payment/:id', authenticate, async (req, res) => {
   console.log("=================payment");
   const id = req.params.id;
   console.log(id);
   try {
     const payments = req.body.payment;
-    const getPayment = await Ride.findById(id);
-    const addPayment = +getPayment.payment + +payments;
-     console.log(payments);
-     console.log(addPayment);
-    
+    if (!payments) {
+      return res.status(400).json({ error: "plz filled the field" });
+    }
+    else {
+      const getPayment = await Ride.findById(id);
+      const addPayment = +getPayment.payment + +payments;
+      console.log(payments);
+      console.log(addPayment);
+
       await Ride.findByIdAndUpdate(id, {
-        payment:addPayment
+        payment: addPayment
       },
         { new: true }
       );
-    
-    res.status(200).json(updateResult);
+
+      res.status(200).json(updateResult);
+    }
   } catch (err) {
     res.status(500).json(err);
   }
 })
 
-router.put('/rating/:id',authenticate, async(req,res)=>{
+router.put('/rating/:id', authenticate, async (req, res) => {
   console.log("=================update");
   const id = req.params.id;
   console.log(id);
   try {
-   const rating = req.body.rating;
-   console.log(rating);
-   const getRating = await User.findById(id);
-   const set = ((+getRating.rating *478) + +rating)/479;
-   const setRating = parseFloat(set).toFixed(2);
+    const rating = req.body.rating;
+    console.log(rating);
+    
+
+    const getRating = await User.findById(id);
+    const set = ((+getRating.rating*478) + +rating) / 479;
+    const setRating = parseFloat(set).toFixed(2);
 
     const updateResult = await User.findByIdAndUpdate(id, {
-          
-      rating:setRating
+      rating: setRating
     },
-    {new:true}
+      { new: true }
     );
 
 
@@ -540,19 +580,18 @@ router.post('/adminLogin', async (req, res) => {
 
 
 
-router.get('/adminData' ,authAdmin,async(req,res)=> {
-try{
-  const adminData = await User.find();
-  res.send(adminData);
-}catch(err)
-{
-  console.log(err);
-}
+router.get('/adminData', authAdmin, async (req, res) => {
+  try {
+    const adminData = await User.find();
+    res.send(adminData);
+  } catch (err) {
+    console.log(err);
+  }
 })
 
 
 
-router.delete('/adminDelete/:id',authAdmin, async (req, res) => {
+router.delete('/adminDelete/:id', authAdmin, async (req, res) => {
   const id = req.params.id
   console.log(id);
   console.log("============delete");
@@ -565,7 +604,7 @@ router.delete('/adminDelete/:id',authAdmin, async (req, res) => {
   }).catch(err => {
     return res.status(500).json({ success: false, error: err })
   })
-  
+
 });
 
 router.get('/getAdminData/:id', authAdmin, async (req, res) => {
@@ -595,5 +634,16 @@ router.put('/adminUpdate/:id', authAdmin, async (req, res) => {
   }
 });
 
+router.get('/adminDetails', authAdmin, async (req, res) => {
+  console.log('-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=--==-=----------------- rideDetails');
+  try {
+
+    const driverData = await Ride.find();
+    res.send(driverData);
+
+  } catch (e) {
+    res.send(e);
+  }
+});
 
 module.exports = router;

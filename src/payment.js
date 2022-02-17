@@ -79,10 +79,18 @@ const Payment = () => {
                 payment
             })
         });
+        response.json();
+
+        if(response.status===400||!response)
+        {
+           window.confirm("Enter Payment");
+           console.log("Enter Payment");
+        }
+           
     }
     useEffect(() => {
         getPayment();
-        payment();
+        //payment();
     }, []);
     return (
         <>

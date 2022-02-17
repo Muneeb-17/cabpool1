@@ -15,7 +15,7 @@ const AdminUserData = () => {
 
     const getUser = async () => {
         try {
-            const response = await fetch('/rideDetails', {
+            const response = await fetch('/adminDetails', {
                 method: "GET",
                 headers: {
                     Accept: "application/json",

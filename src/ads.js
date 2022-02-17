@@ -79,8 +79,8 @@ const Ads = () => {
             window.alert("Request Sent");
 
         }
-        else if (response.status === 208) {
-            window.alert("Already Sent");
+        else if (response.status === 400) {
+            window.alert("Authorization: Already Sent");
         }
 
     }

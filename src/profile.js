@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import './login.css';
 import Navigation2 from "./Navigation2"
+import StarOutlineIcon from '@material-ui/icons/StarOutline';
 
 
 const Profile = () => {
@@ -11,10 +12,8 @@ const Profile = () => {
     const [userName, setUserName] = useState('');
     const [userEmail, setUserEmail] = useState('');
     const [userNumber, setUserNumber] = useState('');
-    const [password, setPassword] = useState('');
-    const [cpassword, setCPassword] = useState('');
-    const [oldPassword, setOldPassword] = useState('');
     const [userImage, setUserImage] = useState('');
+    const [userRating, setUserRating] = useState('');
     const [data, setData] = useState('');
    const [newUser , setNewUser] =useState({
        photo: '',
@@ -82,6 +81,7 @@ const Profile = () => {
             setUserName({ name: data.rootUser.name });
             setUserEmail({ email: data.rootUser.email });
             setUserNumber({ number: data.rootUser.number });
+            setUserRating({ rating: data.rootUser.rating });
             setUserImage({image: data.rootUser.image})
            
             console.log(res.status);
@@ -107,7 +107,9 @@ const Profile = () => {
                     <div class="col-md-3 border-right">
                         <div class="d-flex flex-column align-items-center text-center p-3 py-5">
                             <img className="rounded-circle mt-5" src={newUser.photo ? URL.createObjectURL(newUser.photo) : PF+userImage.image} width="150px" height="200px" />
-                            <span class="font-weight-bold">{userName.name}</span><span>
+                            <span class="font-weight-bold">{userName.name}</span>
+                           <span class="font-weight-bold"><StarOutlineIcon/>{userRating.rating}</span>
+                            <span>
                             <input type="file" id="photo" name="photo" accept="image/*"
                                     onChange={handlePhoto}
                                 />
